@@ -1,0 +1,2098 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ContratoFácil — Gerador de Contratos Jurídicos Online Grátis | + Ferramentas para Advogados</title>
+<meta name="description" content="Gere contratos jurídicos profissionais em minutos: prestação de serviço, locação, NDA, sociedade, trabalho CLT e mais de 15 modelos. Grátis para começar. Inclui calculadoras de FGTS, rescisão e ferramentas para escritórios.">
+<meta name="keywords" content="gerador de contrato online, contrato grátis advogado, modelo de contrato, contrato de prestação de serviço, NDA confidencialidade, contrato de honorários advocatícios, calculadora trabalhista, contrato CLT, modelo jurídico online">
+<meta property="og:title" content="ContratoFácil — Contratos Jurídicos Profissionais em Minutos">
+<meta property="og:description" content="15+ modelos de contrato prontos para advogados, MEIs e empresas. Grátis para começar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{
+  --bg:#0A0F1E;--bg2:#111827;--bg3:#1a2234;--surface:#1E293B;--surface2:#243044;
+  --border:#2D3748;--border2:#374151;
+  --text:#F1F5F9;--text2:#94A3B8;--text3:#64748B;
+  --accent:#6366F1;--accent2:#818CF8;--accent-glow:rgba(99,102,241,.15);
+  --green:#10B981;--green-cl:rgba(16,185,129,.12);
+  --amber:#F59E0B;--amber-cl:rgba(245,158,11,.12);
+  --red:#EF4444;--red-cl:rgba(239,68,68,.12);
+  --radius:12px;--radius-lg:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:rgba(10,15,30,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 1.5rem}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;gap:1rem}
+.logo{font-size:18px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.logo-icon{width:30px;height:30px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.nav-search{flex:1;max-width:360px;position:relative}
+.nav-search input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 12px 7px 34px;font-size:13px;color:var(--text);font-family:'Sora',sans-serif}
+.nav-search input::placeholder{color:var(--text3)}
+.nav-search input:focus{outline:none;border-color:var(--accent)}
+.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:14px}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-pill{font-size:12px;color:var(--text2);background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:5px 12px;white-space:nowrap}
+.nav-cta{background:var(--accent);color:#fff;padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;border:none;cursor:pointer;white-space:nowrap;transition:all .2s}
+.nav-cta:hover{background:var(--accent2);transform:translateY(-1px)}
+
+/* HERO */
+.hero{max-width:1200px;margin:0 auto;padding:4rem 1.5rem 3rem;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-glow);border:1px solid var(--accent);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--accent2);margin-bottom:1.5rem}
+.hero-badge span{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+h1{font-size:clamp(28px,5vw,52px);font-weight:700;line-height:1.15;margin-bottom:1rem;letter-spacing:-.5px}
+h1 .accent{background:linear-gradient(135deg,var(--accent2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(14px,2vw,18px);color:var(--text2);max-width:600px;margin:0 auto 2rem;line-height:1.7}
+.hero-stats{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-bottom:2rem}
+.stat{text-align:center}
+.stat-num{font-size:28px;font-weight:700;color:var(--accent2)}
+.stat-label{font-size:12px;color:var(--text3)}
+
+/* CATEGORIES */
+.categories{max-width:1200px;margin:0 auto;padding:0 1.5rem 1rem;display:flex;gap:8px;flex-wrap:wrap}
+.cat-btn{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .2s;font-family:'Sora',sans-serif}
+.cat-btn:hover,.cat-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* GRID */
+.grid-wrap{max-width:1200px;margin:0 auto;padding:0 1.5rem 4rem}
+.section-label{font-size:11px;letter-spacing:2px;color:var(--text3);font-weight:600;text-transform:uppercase;margin:2rem 0 1rem;display:flex;align-items:center;gap:10px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .25s;cursor:pointer;position:relative}
+.tool-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 30px rgba(99,102,241,.15)}
+.tool-card.locked{opacity:.75}
+.tool-card.locked:hover{border-color:var(--amber)}
+.card-header{padding:1.1rem 1.1rem .7rem;display:flex;align-items:flex-start;gap:12px}
+.tool-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.tool-meta{flex:1}
+.tool-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
+.tool-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.tool-badges{padding:0 1.1rem .8rem;display:flex;align-items:center;gap:6px}
+.badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;letter-spacing:.3px}
+.b-free{background:var(--green-cl);color:var(--green)}
+.b-pro{background:var(--accent-glow);color:var(--accent2)}
+.b-hot{background:var(--red-cl);color:var(--red)}
+.b-new{background:var(--amber-cl);color:var(--amber)}
+.lock-icon{position:absolute;top:12px;right:12px;font-size:14px;color:var(--amber)}
+.use-btn{width:calc(100% - 2.2rem);margin:0 1.1rem 1.1rem;padding:9px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;color:var(--text2);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:'Sora',sans-serif;text-align:center}
+.tool-card:hover .use-btn{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* MODAL / TOOL SCREEN */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;padding:1rem;overflow-y:auto}
+.overlay.active{display:flex;align-items:flex-start;justify-content:center;padding-top:2rem}
+.tool-modal{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);width:100%;max-width:700px;overflow:hidden;position:relative}
+.modal-header{background:var(--surface);padding:1.2rem 1.5rem;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+.modal-icon-big{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.modal-title{font-size:17px;font-weight:600}
+.modal-sub{font-size:12px;color:var(--text2)}
+.close-btn{margin-left:auto;background:var(--bg3);border:1px solid var(--border);border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text2);font-size:16px;flex-shrink:0}
+.close-btn:hover{color:var(--text);background:var(--surface2)}
+.modal-body{padding:1.5rem}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:5px;letter-spacing:.3px}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--surface);border:1px solid var(--border2);border-radius:8px;padding:10px 12px;font-size:14px;color:var(--text);font-family:'Sora',sans-serif;transition:border-color .15s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--accent)}
+.form-group select option{background:var(--bg2)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.calc-btn{width:100%;background:var(--accent);color:#fff;padding:13px;border-radius:10px;font-size:15px;font-weight:600;border:none;cursor:pointer;margin-top:.5rem;font-family:'Sora',sans-serif;transition:all .2s}
+.calc-btn:hover{background:var(--accent2);transform:translateY(-1px)}
+.result-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;margin-top:1rem;display:none}
+.result-box.show{display:block}
+.result-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:14px}
+.result-row:last-child{border-bottom:none;font-weight:600;color:var(--accent2);font-size:15px;padding-top:10px}
+.result-row .label{color:var(--text2)}
+.result-highlight{font-size:28px;font-weight:700;color:var(--green);text-align:center;padding:1rem 0}
+.result-sub{font-size:13px;color:var(--text2);text-align:center;margin-bottom:1rem}
+.pdf-btn{width:100%;background:var(--green);color:#fff;padding:10px;border-radius:8px;font-size:13px;font-weight:600;border:none;cursor:pointer;margin-top:.8rem;font-family:'Sora',sans-serif}
+.pdf-btn:hover{opacity:.9}
+.contrato-area{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;font-size:12px;line-height:2;color:var(--text2);max-height:320px;overflow-y:auto;white-space:pre-wrap;font-family:'JetBrains Mono',monospace;margin-top:1rem;display:none}
+.contrato-area.show{display:block}
+
+/* PAYWALL */
+.paywall-modal{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);width:100%;max-width:420px;padding:2rem;text-align:center}
+.paywall-icon{font-size:48px;margin-bottom:1rem}
+.paywall-title{font-size:22px;font-weight:700;margin-bottom:.5rem}
+.paywall-sub{font-size:14px;color:var(--text2);margin-bottom:1.5rem;line-height:1.6}
+.price-big{font-size:42px;font-weight:700;color:var(--accent2)}
+.price-period{font-size:13px;color:var(--text3);margin-bottom:1.5rem}
+.plan-features{text-align:left;margin-bottom:1.5rem}
+.plan-features li{font-size:13px;padding:5px 0;display:flex;align-items:center;gap:8px;list-style:none;color:var(--text2)}
+.plan-features li::before{content:'✓';color:var(--green);font-weight:700}
+.paywall-btn{width:100%;background:var(--accent);color:#fff;padding:14px;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;margin-bottom:10px;font-family:'Sora',sans-serif}
+.paywall-cancel{font-size:13px;color:var(--text3);cursor:pointer;background:none;border:none;font-family:'Sora',sans-serif}
+.paywall-cancel:hover{color:var(--text2)}
+.pix-note{font-size:11px;color:var(--text3);margin-top:10px}
+
+/* PRICING SECTION */
+.pricing{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:4rem 1.5rem;text-align:center}
+.pricing-inner{max-width:680px;margin:0 auto}
+.pricing-title{font-size:clamp(22px,4vw,36px);font-weight:700;margin-bottom:.5rem}
+.pricing-sub{font-size:15px;color:var(--text2);margin-bottom:2.5rem}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;max-width:560px;margin:0 auto}
+.plan{border-radius:var(--radius-lg);padding:1.5rem;border:1px solid var(--border);text-align:left}
+.plan.featured{background:var(--accent);border-color:transparent;position:relative;overflow:hidden}
+.plan.featured::before{content:'MAIS POPULAR';position:absolute;top:14px;right:-28px;background:var(--amber);color:#000;font-size:9px;font-weight:700;padding:3px 36px;transform:rotate(45deg);letter-spacing:1px}
+.plan-name{font-size:11px;letter-spacing:1.5px;font-weight:600;opacity:.6;margin-bottom:8px;text-transform:uppercase}
+.plan-price{font-size:36px;font-weight:700;margin-bottom:3px}
+.plan-period{font-size:12px;opacity:.6;margin-bottom:1.2rem}
+.plan-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:1.2rem}
+.plan-list li{font-size:13px;display:flex;align-items:center;gap:7px}
+.plan-list li::before{content:'✓';font-weight:700;flex-shrink:0}
+.plan.featured .plan-list li::before{color:var(--amber)}
+.plan:not(.featured) .plan-list li::before{color:var(--green)}
+.plan:not(.featured) .plan-list li.no{opacity:.35}
+.plan:not(.featured) .plan-list li.no::before{content:'✗'}
+.plan-btn{width:100%;padding:11px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;font-family:'Sora',sans-serif}
+.plan-btn-free{background:var(--bg3);color:var(--text2)}
+.plan-btn-pro{background:var(--amber);color:#000}
+.plan-btn:hover{opacity:.9;transform:translateY(-1px)}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;font-size:13px;color:var(--text3)}
+footer strong{color:var(--text2)}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .nav-search{display:none}
+  .hero-stats{gap:1rem}
+  .plans,.form-row{grid-template-columns:1fr}
+  .tool-modal{margin:0 .5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><div class="logo-icon">⚖️</div>ContratoFácil</div>
+    <div class="nav-search">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Buscar contrato ou ferramenta..." oninput="buscarFerramenta(this.value)" id="searchInput">
+    </div>
+    <div class="nav-right">
+      <span class="nav-pill" id="usosRestantes">5 usos grátis hoje</span>
+      <button class="nav-cta" onclick="showPaywall()">Pro — R$19,99/mês</button>
+    </div>
+  </div>
+</nav>
+
+<div id="landing">
+<section class="hero">
+  <div class="hero-badge"><span></span> Mais de 4.200 contratos gerados esta semana</div>
+  <h1>Contratos jurídicos<br>profissionais em<br><span class="accent">minutos, não em dias</span></h1>
+  <p class="hero-sub">15+ modelos de contrato prontos para advogados, escritórios, MEIs e empresas. Prestação de serviço, NDA, sociedade, trabalho CLT e muito mais. Mais ferramentas de cálculo trabalhista e financeiro como suporte ao seu trabalho.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Modelos de Contrato</div></div>
+    <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Ferramentas de Apoio</div></div>
+    <div class="stat"><div class="stat-num">R$0</div><div class="stat-label">Para começar</div></div>
+    <div class="stat"><div class="stat-num">2min</div><div class="stat-label">Por contrato</div></div>
+  </div>
+</section>
+
+<div class="categories" id="catBar">
+  <button class="cat-btn active" onclick="filtrar('juridico_todos',this)">⚖️ Todos os Contratos</button>
+  <button class="cat-btn" onclick="filtrar('juridico',this)">📜 Jurídico Avançado</button>
+  <button class="cat-btn" onclick="filtrar('contrato',this)">📄 Contratos do Dia a Dia</button>
+  <button class="cat-btn" onclick="filtrar('todos',this)">🧰 Ver Tudo</button>
+  <button class="cat-btn" onclick="filtrar('financeiro',this)">💰 Calculadoras</button>
+  <button class="cat-btn" onclick="filtrar('trabalho',this)">💼 Trabalhista</button>
+  <button class="cat-btn" onclick="filtrar('mei',this)">🏪 MEI</button>
+  <button class="cat-btn" onclick="filtrar('gerador',this)">⚙️ Geradores</button>
+</div>
+
+<div class="grid-wrap">
+  <div class="section-label">Contratos mais usados</div>
+  <div class="tools-grid" id="toolsGrid"></div>
+</div>
+
+<section class="pricing">
+  <div class="pricing-inner">
+    <div class="pricing-title">Simples e sem surpresas</div>
+    <p class="pricing-sub">1 contrato grátis para testar. Pro libera todos os 15+ modelos e ferramentas por menos de R$0,70 por dia.</p>
+    <div class="plans">
+      <div class="plan">
+        <div class="plan-name">Grátis</div>
+        <div class="plan-price">R$ 0</div>
+        <div class="plan-period">para sempre</div>
+        <ul class="plan-list">
+          <li>5 usos por dia</li>
+          <li>35+ ferramentas</li>
+          <li>Resultados na tela</li>
+          <li class="no">Download PDF</li>
+          <li class="no">Contratos completos</li>
+          <li class="no">Sem limite de uso</li>
+        </ul>
+        <button class="plan-btn plan-btn-free">Usar grátis</button>
+      </div>
+      <div class="plan featured">
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">R$ 19,99</div>
+        <div class="plan-period">por mês — cancele quando quiser</div>
+        <ul class="plan-list">
+          <li>Uso ilimitado</li>
+          <li>35+ ferramentas</li>
+          <li>Download PDF</li>
+          <li>Contratos completos</li>
+          <li>Histórico salvo</li>
+          <li>Novas ferramentas todo mês</li>
+        </ul>
+        <button class="plan-btn plan-btn-pro" onclick="showPaywall()">Assinar Pro</button>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- OVERLAY FERRAMENTA -->
+<div class="overlay" id="toolOverlay">
+  <div class="tool-modal" id="toolModal"></div>
+</div>
+
+<!-- OVERLAY PAYWALL -->
+<div class="overlay" id="paywallOverlay">
+  <div class="paywall-modal">
+    <div class="paywall-icon">🚀</div>
+    <h3 class="paywall-title">Assine o Pro</h3>
+    <p class="paywall-sub">Acesso ilimitado a todas as ferramentas, downloads em PDF e contratos completos.</p>
+    <div class="price-big">R$ 19,99</div>
+    <div class="price-period">por mês · cancele quando quiser</div>
+    <ul class="plan-features">
+      <li>Uso ilimitado de todas as ferramentas</li>
+      <li>Download de resultados em PDF</li>
+      <li>Contratos jurídicos completos</li>
+      <li>Novas ferramentas adicionadas todo mês</li>
+      <li>Suporte prioritário</li>
+    </ul>
+    <button class="paywall-btn" onclick="irHotmart()">⚡ Assinar via PIX ou Cartão</button>
+    <button class="paywall-cancel" onclick="fecharPaywall()">Continuar no plano gratuito</button>
+    <div class="pix-note">🔒 Pagamento seguro via Hotmart · PIX, boleto ou cartão</div>
+  </div>
+</div>
+
+<footer>
+  <strong>ContratoFácil</strong> — Contratos jurídicos e ferramentas para advogados e profissionais<br>
+  <span style="font-size:11px;margin-top:4px;display:block">⚠️ Os contratos gerados são modelos orientativos. Para casos complexos, consulte um advogado.</span>
+</footer>
+
+<script>
+// ═══════════════════════════════════════
+// ESTADO
+// ═══════════════════════════════════════
+let usosHoje = parseInt(localStorage.getItem('usos_'+new Date().toDateString())||'0');
+let isPro = localStorage.getItem('isPro')==='true';
+let catAtual = 'todos';
+
+function usarFerramenta(){
+  if(isPro) return true;
+  if(usosHoje >= 5){ showPaywall(); return false; }
+  usosHoje++;
+  localStorage.setItem('usos_'+new Date().toDateString(), usosHoje);
+  document.getElementById('usosRestantes').textContent = (5-usosHoje)+' usos grátis hoje';
+  return true;
+}
+
+// ═══════════════════════════════════════
+// FERRAMENTAS
+// ═══════════════════════════════════════
+const TOOLS = [
+  // FINANCEIRO
+  {id:'fgts', nome:'Calculadora de FGTS', desc:'Calcule quanto tem direito ao sacar o FGTS por demissão sem justa causa', icon:'🏦', bg:'#1a3a5c', cat:'financeiro', hot:true, free:true},
+  {id:'financiamento', nome:'Simulador de Financiamento', desc:'Simule parcelas de financiamento imobiliário ou de veículo (SAC e Price)', icon:'🏠', bg:'#1a3a5c', cat:'financeiro', free:true},
+  {id:'juros', nome:'Calculadora de Juros Compostos', desc:'Calcule o crescimento do seu dinheiro com juros compostos ao longo do tempo', icon:'📈', bg:'#1a3a5c', cat:'financeiro', free:true},
+  {id:'desconto', nome:'Calculadora de Desconto', desc:'Calcule o preço final após desconto percentual ou fixo em produtos e serviços', icon:'🏷️', bg:'#1a3a5c', cat:'financeiro', free:true},
+  {id:'aposentadoria', nome:'Simulador de Aposentadoria', desc:'Quanto você precisa guardar por mês para se aposentar com a renda desejada', icon:'👴', bg:'#1a3a5c', cat:'financeiro', free:true},
+  {id:'percentual', nome:'Calculadora de Percentual', desc:'Calcule porcentagem, aumento, desconto e variação entre dois valores', icon:'%', bg:'#1a3a5c', cat:'calculos', free:true},
+  {id:'margem', nome:'Calculadora de Margem de Lucro', desc:'Calcule preço de venda, margem e markup para seus produtos e serviços', icon:'💹', bg:'#1a3a5c', cat:'financeiro', new:true, free:true},
+  {id:'salario', nome:'Calculadora de Salário Líquido', desc:'Calcule o salário líquido com desconto de INSS e IRRF para CLT', icon:'💳', bg:'#1a3a5c', cat:'financeiro', hot:true, free:true},
+
+  // MEI
+  {id:'mei', nome:'Calculadora MEI', desc:'Calcule impostos DAS, limite de faturamento e quanto pode faturar por mês', icon:'🏪', bg:'#1a4a2e', cat:'mei', hot:true, free:true},
+  {id:'nota_mei', nome:'Simulador Nota Fiscal MEI', desc:'Simule quanto imposto pagar ao emitir nota fiscal para pessoa jurídica', icon:'🧾', bg:'#1a4a2e', cat:'mei', free:true},
+  {id:'limite_mei', nome:'Monitor de Limite MEI', desc:'Acompanhe seu faturamento anual e veja quando está próximo do limite MEI', icon:'📊', bg:'#1a4a2e', cat:'mei', new:true, free:true},
+
+  // TRABALHO
+  {id:'curriculo', nome:'Gerador de Currículo', desc:'Monte um currículo profissional completo e baixe em PDF', icon:'📋', bg:'#3a1a5c', cat:'trabalho', hot:true, free:false},
+  {id:'horas', nome:'Calculadora de Horas Trabalhadas', desc:'Calcule total de horas, horas extras e valor a receber por período', icon:'⏱️', bg:'#3a1a5c', cat:'trabalho', free:true},
+  {id:'freelancer', nome:'Precificação para Freelancer', desc:'Calcule quanto cobrar por hora e por projeto considerando seus custos', icon:'💻', bg:'#3a1a5c', cat:'trabalho', free:true},
+  {id:'ferias', nome:'Calculadora de Férias CLT', desc:'Calcule o valor das suas férias, terço constitucional e abono pecuniário', icon:'🏖️', bg:'#3a1a5c', cat:'trabalho', free:true},
+  {id:'rescisao', nome:'Calculadora de Rescisão', desc:'Calcule aviso prévio, saldo de salário, 13º e multa do FGTS na demissão', icon:'📤', bg:'#3a1a5c', cat:'trabalho', hot:true, free:true},
+  {id:'hora_extra', nome:'Calculadora de Hora Extra', desc:'Calcule o valor de horas extras a 50%, 100% e adicional noturno', icon:'🌙', bg:'#3a1a5c', cat:'trabalho', free:true},
+
+  // CONTRATOS
+  {id:'contrato_servico', nome:'Contrato de Prestação de Serviço', desc:'Gere um contrato completo entre prestador e contratante para qualquer serviço', icon:'📝', bg:'#3a2a1a', cat:'contrato', hot:true, free:true},
+  {id:'contrato_aluguel', nome:'Contrato de Locação Residencial', desc:'Contrato de aluguel residencial completo com cláusulas de proteção', icon:'🏠', bg:'#3a2a1a', cat:'contrato', free:false},
+  {id:'contrato_freelancer', nome:'Contrato para Freelancer/Dev', desc:'Contrato profissional para projetos de desenvolvimento e design', icon:'💻', bg:'#3a2a1a', cat:'contrato', new:true, free:false},
+  {id:'contrato_parceria', nome:'Contrato de Parceria Comercial', desc:'Formalize parcerias entre empresas ou empreendedores com segurança', icon:'🤝', bg:'#3a2a1a', cat:'contrato', free:false},
+  {id:'contrato_compravenda', nome:'Contrato de Compra e Venda', desc:'Formalize a venda de bens móveis ou imóveis com contrato válido', icon:'🔑', bg:'#3a2a1a', cat:'contrato', free:false},
+  {id:'contrato_mei', nome:'Contrato de Serviço MEI', desc:'Modelo simplificado de contrato ideal para Microempreendedores Individuais', icon:'🏪', bg:'#3a2a1a', cat:'contrato', free:false},
+
+  // JURÍDICO — CONTRATOS AVANÇADOS
+  {id:'contrato_nda', nome:'NDA — Acordo de Confidencialidade', desc:'Termo de sigilo e confidencialidade entre empresas, sócios ou colaboradores', icon:'🔒', bg:'#2a1a4a', cat:'juridico', hot:true, free:false},
+  {id:'contrato_socio', nome:'Contrato Social / Acordo de Sócios', desc:'Formalize direitos, obrigações e participação entre sócios de empresa', icon:'🏢', bg:'#2a1a4a', cat:'juridico', free:false},
+  {id:'contrato_trabalho', nome:'Contrato de Trabalho CLT', desc:'Contrato de emprego formal com todas as cláusulas exigidas pela CLT', icon:'👔', bg:'#2a1a4a', cat:'juridico', new:true, free:false},
+  {id:'contrato_estagio', nome:'Contrato de Estágio', desc:'Termo de estágio obrigatório ou não-obrigatório conforme Lei 11.788/08', icon:'🎓', bg:'#2a1a4a', cat:'juridico', free:false},
+  {id:'contrato_emprestimo', nome:'Contrato de Empréstimo entre PF', desc:'Formalize empréstimo de dinheiro entre pessoas físicas com juros e prazo', icon:'💰', bg:'#2a1a4a', cat:'juridico', free:false},
+  {id:'contrato_comodato', nome:'Contrato de Comodato', desc:'Empréstimo gratuito de bem móvel ou imóvel com prazo e condições definidos', icon:'🤲', bg:'#2a1a4a', cat:'juridico', free:false},
+  {id:'contrato_representacao', nome:'Contrato de Representação Comercial', desc:'Contrato para representante comercial autônomo conforme Lei 4.886/65', icon:'🤝', bg:'#2a1a4a', cat:'juridico', new:true, free:false},
+  {id:'contrato_cessao', nome:'Cessão de Direitos Autorais', desc:'Transfira direitos autorais de obras criativas, softwares ou conteúdos digitais', icon:'©️', bg:'#2a1a4a', cat:'juridico', free:false},
+  {id:'contrato_franquia', nome:'Contrato de Franquia Simplificado', desc:'Acordo entre franqueador e franqueado com direitos e royalties definidos', icon:'🏪', bg:'#2a1a4a', cat:'juridico', free:false},
+  {id:'contrato_honorarios', nome:'Contrato de Honorários Advocatícios', desc:'Contrato entre advogado e cliente definindo honorários, escopo e prazos', icon:'⚖️', bg:'#2a1a4a', cat:'juridico', hot:true, free:false},
+  {id:'contrato_permuta', nome:'Contrato de Permuta / Troca', desc:'Formaliza a troca de bens ou serviços entre as partes sem envolver dinheiro', icon:'🔄', bg:'#2a1a4a', cat:'juridico', free:false},
+  {id:'contrato_fianca', nome:'Contrato de Fiança', desc:'Termo de fiança locatícia com garantias do fiador para contratos de aluguel', icon:'🛡️', bg:'#2a1a4a', cat:'juridico', free:false},
+
+  // GERADORES
+  {id:'senha', nome:'Gerador de Senhas Seguras', desc:'Gere senhas fortes e seguras com letras, números e símbolos', icon:'🔐', bg:'#1a3a3a', cat:'gerador', hot:true, free:true},
+  {id:'cpf', nome:'Validador de CPF/CNPJ', desc:'Valide se um CPF ou CNPJ é matematicamente correto', icon:'🪪', bg:'#1a3a3a', cat:'gerador', free:true},
+  {id:'qrcode', nome:'Gerador de QR Code PIX', desc:'Gere o texto de um QR Code PIX para cobranças rápidas', icon:'📱', bg:'#1a3a3a', cat:'gerador', new:true, free:true},
+  {id:'proposta', nome:'Gerador de Proposta Comercial', desc:'Crie uma proposta comercial profissional em segundos', icon:'📊', bg:'#1a3a3a', cat:'gerador', free:false},
+  {id:'recibo', nome:'Gerador de Recibo de Pagamento', desc:'Gere recibos de pagamento numerados prontos para imprimir', icon:'🧾', bg:'#1a3a3a', cat:'gerador', free:true},
+  {id:'declaracao', nome:'Declaração de Autônomo', desc:'Gere declaração de prestação de serviços autônomo para Imposto de Renda', icon:'📃', bg:'#1a3a3a', cat:'gerador', free:false},
+
+  // CÁLCULOS
+  {id:'imc', nome:'Calculadora de IMC', desc:'Calcule seu Índice de Massa Corporal e veja a classificação', icon:'⚖️', bg:'#2a1a3a', cat:'calculos', free:true},
+  {id:'conversor', nome:'Conversor de Moedas', desc:'Converta entre Real, Dólar, Euro e outras moedas com taxa aproximada', icon:'💱', bg:'#2a1a3a', cat:'calculos', free:true},
+  {id:'area', nome:'Calculadora de Área e Perímetro', desc:'Calcule área e perímetro de quadrado, retângulo, círculo e triângulo', icon:'📐', bg:'#2a1a3a', cat:'calculos', free:true},
+  {id:'tempo', nome:'Calculadora de Diferença de Datas', desc:'Calcule dias, meses e anos entre duas datas para contratos e prazos', icon:'📅', bg:'#2a1a3a', cat:'calculos', free:true},
+  {id:'combustivel', nome:'Calculadora de Combustível', desc:'Compare álcool x gasolina e calcule gasto de combustível por km', icon:'⛽', bg:'#2a1a3a', cat:'calculos', free:true},
+  {id:'calorias', nome:'Calculadora de Calorias', desc:'Calcule sua necessidade calórica diária baseada em peso, altura e atividade', icon:'🥗', bg:'#2a1a3a', cat:'calculos', free:true},
+];
+
+// ═══════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════
+function renderTools(lista){
+  const grid = document.getElementById('toolsGrid');
+  grid.innerHTML = lista.map(t=>`
+    <div class="tool-card ${!t.free?'locked':''}" onclick="abrirFerramenta('${t.id}')">
+      ${!t.free?'<span class="lock-icon">🔒</span>':''}
+      <div class="card-header">
+        <div class="tool-icon" style="background:${t.bg}">${t.icon}</div>
+        <div class="tool-meta">
+          <div class="tool-name">${t.nome}</div>
+          <div class="tool-desc">${t.desc}</div>
+        </div>
+      </div>
+      <div class="tool-badges">
+        ${t.free?'<span class="badge b-free">GRÁTIS</span>':'<span class="badge b-pro">PRO</span>'}
+        ${t.hot?'<span class="badge b-hot">🔥 POPULAR</span>':''}
+        ${t.new?'<span class="badge b-new">✨ NOVO</span>':''}
+      </div>
+      <button class="use-btn">${t.free?'Usar agora →':'Desbloquear →'}</button>
+    </div>
+  `).join('');
+}
+
+function filtrar(cat, btn){
+  catAtual = cat;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  let lista;
+  if(cat==='todos') lista = TOOLS;
+  else if(cat==='juridico_todos') lista = TOOLS.filter(t=>t.cat==='contrato'||t.cat==='juridico');
+  else lista = TOOLS.filter(t=>t.cat===cat);
+  renderTools(lista);
+}
+
+function buscarFerramenta(q){
+  if(!q){ renderTools(TOOLS); return; }
+  const r = TOOLS.filter(t=>t.nome.toLowerCase().includes(q.toLowerCase())||t.desc.toLowerCase().includes(q.toLowerCase()));
+  renderTools(r);
+}
+
+renderTools(TOOLS.filter(t=>t.cat==='contrato'||t.cat==='juridico'));
+
+// ═══════════════════════════════════════
+// ABRIR FERRAMENTA
+// ═══════════════════════════════════════
+function abrirFerramenta(id){
+  const t = TOOLS.find(x=>x.id===id);
+  if(!t) return;
+  if(!t.free && !isPro){ showPaywall(); return; }
+  if(!usarFerramenta()) return;
+  const html = getToolHTML(id, t);
+  document.getElementById('toolModal').innerHTML = html;
+  document.getElementById('toolOverlay').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+
+function fecharTool(){
+  document.getElementById('toolOverlay').classList.remove('active');
+  document.body.style.overflow='';
+}
+
+document.getElementById('toolOverlay').addEventListener('click',function(e){
+  if(e.target===this) fecharTool();
+});
+document.getElementById('paywallOverlay').addEventListener('click',function(e){
+  if(e.target===this) fecharPaywall();
+});
+
+// ═══════════════════════════════════════
+// PAYWALL
+// ═══════════════════════════════════════
+function showPaywall(){ document.getElementById('paywallOverlay').classList.add('active'); document.body.style.overflow='hidden'; }
+function fecharPaywall(){ document.getElementById('paywallOverlay').classList.remove('active'); document.body.style.overflow=''; }
+function irHotmart(){ window.open('https://pay.hotmart.com/C106906927X', '_blank'); }
+
+// ═══════════════════════════════════════
+// HTML DAS FERRAMENTAS
+// ═══════════════════════════════════════
+function modalWrap(t, body){
+  return `
+    <div class="modal-header">
+      <div class="modal-icon-big" style="background:${t.bg}">${t.icon}</div>
+      <div><div class="modal-title">${t.nome}</div><div class="modal-sub">${t.desc}</div></div>
+      <button class="close-btn" onclick="fecharTool()">✕</button>
+    </div>
+    <div class="modal-body">${body}</div>
+  `;
+}
+
+function getToolHTML(id, t){
+  const bodies = {
+
+fgts: `
+<div class="form-row">
+  <div class="form-group"><label>Salário Bruto (R$)</label><input type="number" id="fgts_sal" placeholder="3000"></div>
+  <div class="form-group"><label>Meses Trabalhados</label><input type="number" id="fgts_meses" placeholder="24"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Percentual Depositado</label><select id="fgts_pct"><option value="8">8% (padrão CLT)</option><option value="2">2% (menor salário)</option></select></div>
+  <div class="form-group"><label>Saldo Atual na Conta (R$)</label><input type="number" id="fgts_saldo" placeholder="0" value="0"></div>
+</div>
+<button class="calc-btn" onclick="calcFGTS()">Calcular FGTS</button>
+<div class="result-box" id="r_fgts">
+  <div class="result-highlight" id="fgts_total"></div>
+  <div class="result-sub">Total disponível para saque</div>
+  <div class="result-row"><span class="label">Depósitos no período</span><span id="fgts_dep"></span></div>
+  <div class="result-row"><span class="label">Multa rescisória (40%)</span><span id="fgts_multa"></span></div>
+  <div class="result-row"><span class="label">Saldo inicial informado</span><span id="fgts_ini"></span></div>
+  <div class="result-row"><span class="label">TOTAL ESTIMADO</span><span id="fgts_final"></span></div>
+</div>`,
+
+financiamento: `
+<div class="form-row">
+  <div class="form-group"><label>Valor do bem (R$)</label><input type="number" id="fin_val" placeholder="300000"></div>
+  <div class="form-group"><label>Entrada (R$)</label><input type="number" id="fin_ent" placeholder="60000"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Taxa de juros mensal (%)</label><input type="number" id="fin_taxa" placeholder="0.8" step="0.1"></div>
+  <div class="form-group"><label>Prazo (meses)</label><input type="number" id="fin_meses" placeholder="360"></div>
+</div>
+<div class="form-group"><label>Sistema</label><select id="fin_sistema"><option value="price">Tabela Price (parcelas iguais)</option><option value="sac">SAC (parcelas decrescentes)</option></select></div>
+<button class="calc-btn" onclick="calcFin()">Simular Financiamento</button>
+<div class="result-box" id="r_fin">
+  <div class="result-highlight" id="fin_parcela"></div>
+  <div class="result-sub" id="fin_sistema_label"></div>
+  <div class="result-row"><span class="label">Valor financiado</span><span id="fin_financiado"></span></div>
+  <div class="result-row"><span class="label">Total de juros pagos</span><span id="fin_juros"></span></div>
+  <div class="result-row"><span class="label">Custo total do bem</span><span id="fin_custo"></span></div>
+  <div class="result-row"><span class="label">Parcela (1ª no SAC)</span><span id="fin_parc1"></span></div>
+</div>`,
+
+juros: `
+<div class="form-row">
+  <div class="form-group"><label>Capital inicial (R$)</label><input type="number" id="ji_cap" placeholder="1000"></div>
+  <div class="form-group"><label>Taxa mensal (%)</label><input type="number" id="ji_taxa" placeholder="1" step="0.1"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Período (meses)</label><input type="number" id="ji_meses" placeholder="12"></div>
+  <div class="form-group"><label>Aporte mensal (R$)</label><input type="number" id="ji_aporte" placeholder="0" value="0"></div>
+</div>
+<button class="calc-btn" onclick="calcJuros()">Calcular</button>
+<div class="result-box" id="r_juros">
+  <div class="result-highlight" id="juros_final"></div>
+  <div class="result-sub">Montante final</div>
+  <div class="result-row"><span class="label">Capital investido</span><span id="juros_cap"></span></div>
+  <div class="result-row"><span class="label">Juros ganhos</span><span id="juros_ganho"></span></div>
+  <div class="result-row"><span class="label">Rentabilidade total</span><span id="juros_rent"></span></div>
+</div>`,
+
+salario: `
+<div class="form-row">
+  <div class="form-group"><label>Salário Bruto (R$)</label><input type="number" id="sal_bruto" placeholder="4000"></div>
+  <div class="form-group"><label>Dependentes</label><input type="number" id="sal_dep" placeholder="0" value="0"></div>
+</div>
+<button class="calc-btn" onclick="calcSalario()">Calcular Salário Líquido</button>
+<div class="result-box" id="r_sal">
+  <div class="result-highlight" id="sal_liq"></div>
+  <div class="result-sub">Salário líquido estimado</div>
+  <div class="result-row"><span class="label">Salário bruto</span><span id="sal_b"></span></div>
+  <div class="result-row"><span class="label">Desconto INSS</span><span id="sal_inss"></span></div>
+  <div class="result-row"><span class="label">Desconto IRRF</span><span id="sal_irrf"></span></div>
+  <div class="result-row"><span class="label">SALÁRIO LÍQUIDO</span><span id="sal_l"></span></div>
+</div>`,
+
+mei: `
+<div class="form-row">
+  <div class="form-group"><label>Faturamento Mensal (R$)</label><input type="number" id="mei_fat" placeholder="8000"></div>
+  <div class="form-group"><label>Atividade Principal</label><select id="mei_tipo"><option value="comercio">Comércio</option><option value="servico">Serviços</option><option value="industria">Indústria</option></select></div>
+</div>
+<button class="calc-btn" onclick="calcMEI()">Calcular</button>
+<div class="result-box" id="r_mei">
+  <div class="result-highlight" id="mei_das"></div>
+  <div class="result-sub">DAS mensal a pagar</div>
+  <div class="result-row"><span class="label">Faturamento mensal</span><span id="mei_f"></span></div>
+  <div class="result-row"><span class="label">Limite anual MEI 2024</span><span id="mei_lim"></span></div>
+  <div class="result-row"><span class="label">Faturamento anual projetado</span><span id="mei_anual"></span></div>
+  <div class="result-row"><span class="label">% do limite utilizado</span><span id="mei_pct"></span></div>
+  <div class="result-row"><span class="label">STATUS</span><span id="mei_status"></span></div>
+</div>`,
+
+freelancer: `
+<div class="form-row">
+  <div class="form-group"><label>Salário desejado/mês (R$)</label><input type="number" id="free_sal" placeholder="5000"></div>
+  <div class="form-group"><label>Horas disponíveis/mês</label><input type="number" id="free_horas" placeholder="120"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Custos fixos/mês (R$)</label><input type="number" id="free_custos" placeholder="500"></div>
+  <div class="form-group"><label>Impostos estimados (%)</label><input type="number" id="free_imp" placeholder="15" value="15"></div>
+</div>
+<button class="calc-btn" onclick="calcFreelancer()">Calcular meu preço</button>
+<div class="result-box" id="r_free">
+  <div class="result-highlight" id="free_hora"></div>
+  <div class="result-sub">Valor mínimo por hora</div>
+  <div class="result-row"><span class="label">Custo total mensal</span><span id="free_total"></span></div>
+  <div class="result-row"><span class="label">Valor hora mínimo</span><span id="free_min"></span></div>
+  <div class="result-row"><span class="label">Valor hora recomendado (+30%)</label><span id="free_rec"></span></div>
+  <div class="result-row"><span class="label">Projeto de 10h valeria</span><span id="free_proj"></span></div>
+</div>`,
+
+rescisao: `
+<div class="form-row">
+  <div class="form-group"><label>Salário Bruto (R$)</label><input type="number" id="res_sal" placeholder="3000"></div>
+  <div class="form-group"><label>Meses Trabalhados</label><input type="number" id="res_meses" placeholder="18"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Dias trabalhados no mês</label><input type="number" id="res_dias" placeholder="15"></div>
+  <div class="form-group"><label>Tipo de demissão</label><select id="res_tipo"><option value="semcausa">Sem justa causa (empresa)</option><option value="pedido">Pedido do funcionário</option></select></div>
+</div>
+<button class="calc-btn" onclick="calcRescisao()">Calcular Rescisão</button>
+<div class="result-box" id="r_res">
+  <div class="result-highlight" id="res_total"></div>
+  <div class="result-sub">Total a receber (estimado)</div>
+  <div class="result-row"><span class="label">Saldo de salário</span><span id="res_saldo"></span></div>
+  <div class="result-row"><span class="label">13º proporcional</span><span id="res_13"></span></div>
+  <div class="result-row"><span class="label">Férias + 1/3</span><span id="res_ferias"></span></div>
+  <div class="result-row"><span class="label">Aviso prévio</span><span id="res_aviso"></span></div>
+  <div class="result-row"><span class="label">Multa FGTS (40%)</span><span id="res_multa"></span></div>
+  <div class="result-row"><span class="label">TOTAL ESTIMADO</span><span id="res_tot"></span></div>
+</div>`,
+
+margem: `
+<div class="form-group"><label>Modo de cálculo</label><select id="mg_modo" onchange="alternarModo()"><option value="venda">Tenho o preço de custo → calcular venda</option><option value="custo">Tenho o preço de venda → calcular margem</option></select></div>
+<div class="form-row">
+  <div class="form-group"><label id="mg_l1">Custo do produto (R$)</label><input type="number" id="mg_v1" placeholder="50"></div>
+  <div class="form-group"><label id="mg_l2">Margem desejada (%)</label><input type="number" id="mg_v2" placeholder="40"></div>
+</div>
+<button class="calc-btn" onclick="calcMargem()">Calcular</button>
+<div class="result-box" id="r_mg">
+  <div class="result-highlight" id="mg_res"></div>
+  <div class="result-sub" id="mg_sub"></div>
+  <div class="result-row"><span class="label">Custo</span><span id="mg_custo"></span></div>
+  <div class="result-row"><span class="label">Preço de venda</span><span id="mg_venda"></span></div>
+  <div class="result-row"><span class="label">Lucro por unidade</span><span id="mg_lucro"></span></div>
+  <div class="result-row"><span class="label">Markup</span><span id="mg_markup"></span></div>
+</div>`,
+
+senha: `
+<div class="form-row">
+  <div class="form-group"><label>Comprimento</label><input type="number" id="pw_len" value="16" min="6" max="64"></div>
+  <div class="form-group"><label>Quantidade</label><input type="number" id="pw_qty" value="5" min="1" max="20"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="pw_upper" checked> Maiúsculas (A-Z)</label></div>
+  <div class="form-group"><label style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="pw_lower" checked> Minúsculas (a-z)</label></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="pw_num" checked> Números (0-9)</label></div>
+  <div class="form-group"><label style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="pw_sym" checked> Símbolos (!@#)</label></div>
+</div>
+<button class="calc-btn" onclick="gerarSenha()">⚡ Gerar Senhas</button>
+<div class="result-box" id="r_pw" style="font-family:'JetBrains Mono',monospace"></div>`,
+
+cpf: `
+<div class="form-group"><label>CPF ou CNPJ (só números)</label><input type="text" id="doc_val" placeholder="12345678900" maxlength="18" oninput="formatDoc(this)"></div>
+<button class="calc-btn" onclick="validarDoc()">Validar</button>
+<div class="result-box" id="r_doc">
+  <div class="result-highlight" id="doc_res" style="font-size:22px"></div>
+  <div class="result-sub" id="doc_sub"></div>
+</div>`,
+
+percentual: `
+<div class="form-group"><label>Operação</label><select id="pct_op"><option value="pct">X% de Y = ?</option><option value="aumento">Aumento de X% em Y</option><option value="desconto">Desconto de X% em Y</option><option value="variacao">Variação de X para Y (%)</option></select></div>
+<div class="form-row">
+  <div class="form-group"><label id="pct_l1">Percentual (%)</label><input type="number" id="pct_v1" placeholder="15"></div>
+  <div class="form-group"><label id="pct_l2">Valor base</label><input type="number" id="pct_v2" placeholder="200"></div>
+</div>
+<button class="calc-btn" onclick="calcPct()">Calcular</button>
+<div class="result-box" id="r_pct"><div class="result-highlight" id="pct_res"></div><div class="result-sub" id="pct_sub"></div></div>`,
+
+horas: `
+<div class="form-row">
+  <div class="form-group"><label>Hora de entrada</label><input type="time" id="hr_ent" value="08:00"></div>
+  <div class="form-group"><label>Hora de saída</label><input type="time" id="hr_sai" value="17:00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Intervalo (minutos)</label><input type="number" id="hr_int" value="60"></div>
+  <div class="form-group"><label>Dias trabalhados</label><input type="number" id="hr_dias" value="22"></div>
+</div>
+<div class="form-group"><label>Valor por hora (R$) — opcional</label><input type="number" id="hr_valor" placeholder="25"></div>
+<button class="calc-btn" onclick="calcHoras()">Calcular</button>
+<div class="result-box" id="r_hr">
+  <div class="result-highlight" id="hr_total"></div>
+  <div class="result-sub">Horas trabalhadas no período</div>
+  <div class="result-row"><span class="label">Horas por dia</span><span id="hr_dia"></span></div>
+  <div class="result-row"><span class="label">Total de dias</span><span id="hr_d"></span></div>
+  <div class="result-row"><span class="label">Total a receber</span><span id="hr_rec"></span></div>
+</div>`,
+
+imc: `
+<div class="form-row">
+  <div class="form-group"><label>Peso (kg)</label><input type="number" id="imc_p" placeholder="70"></div>
+  <div class="form-group"><label>Altura (cm)</label><input type="number" id="imc_a" placeholder="170"></div>
+</div>
+<button class="calc-btn" onclick="calcIMC()">Calcular IMC</button>
+<div class="result-box" id="r_imc">
+  <div class="result-highlight" id="imc_val"></div>
+  <div class="result-sub" id="imc_class"></div>
+  <div class="result-row"><span class="label">Peso ideal estimado</span><span id="imc_ideal"></span></div>
+  <div class="result-row"><span class="label">Diferença para peso ideal</span><span id="imc_diff"></span></div>
+</div>`,
+
+conversor: `
+<div class="form-row">
+  <div class="form-group"><label>Valor</label><input type="number" id="conv_val" placeholder="100"></div>
+  <div class="form-group"><label>De</label><select id="conv_de"><option value="BRL">Real (BRL)</option><option value="USD">Dólar (USD)</option><option value="EUR">Euro (EUR)</option><option value="GBP">Libra (GBP)</option><option value="ARS">Peso AR (ARS)</option></select></div>
+</div>
+<div class="form-group"><label>Para</label><select id="conv_para"><option value="USD">Dólar (USD)</option><option value="EUR">Euro (EUR)</option><option value="BRL">Real (BRL)</option><option value="GBP">Libra (GBP)</option></select></div>
+<button class="calc-btn" onclick="calcConv()">Converter</button>
+<div class="result-box" id="r_conv"><div class="result-highlight" id="conv_res"></div><div class="result-sub" id="conv_sub" style="font-size:11px">Taxas aproximadas de referência. Consulte seu banco para transações reais.</div></div>`,
+
+tempo: `
+<div class="form-row">
+  <div class="form-group"><label>Data inicial</label><input type="date" id="dt_ini"></div>
+  <div class="form-group"><label>Data final</label><input type="date" id="dt_fim"></div>
+</div>
+<button class="calc-btn" onclick="calcTempo()">Calcular diferença</button>
+<div class="result-box" id="r_dt">
+  <div class="result-highlight" id="dt_dias"></div>
+  <div class="result-sub">dias de diferença</div>
+  <div class="result-row"><span class="label">Em semanas</span><span id="dt_sem"></span></div>
+  <div class="result-row"><span class="label">Em meses (aprox.)</span><span id="dt_mes"></span></div>
+  <div class="result-row"><span class="label">Em anos (aprox.)</span><span id="dt_ano"></span></div>
+</div>`,
+
+combustivel: `
+<div class="form-row">
+  <div class="form-group"><label>Preço da Gasolina (R$/L)</label><input type="number" id="cb_gas" placeholder="5.80" step="0.01"></div>
+  <div class="form-group"><label>Preço do Álcool (R$/L)</label><input type="number" id="cb_alc" placeholder="3.90" step="0.01"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Km rodados/mês</label><input type="number" id="cb_km" placeholder="1500"></div>
+  <div class="form-group"><label>Consumo médio (km/L)</label><input type="number" id="cb_cons" placeholder="12"></div>
+</div>
+<button class="calc-btn" onclick="calcComb()">Calcular</button>
+<div class="result-box" id="r_cb">
+  <div class="result-highlight" id="cb_melhor"></div>
+  <div class="result-sub" id="cb_ratio"></div>
+  <div class="result-row"><span class="label">Gasto mensal gasolina</span><span id="cb_ggas"></span></div>
+  <div class="result-row"><span class="label">Gasto mensal álcool</span><span id="cb_galc"></span></div>
+  <div class="result-row"><span class="label">Economia mensal</span><span id="cb_eco"></span></div>
+</div>`,
+
+area: `
+<div class="form-group"><label>Forma</label><select id="area_forma" onchange="updateAreaFields()"><option value="ret">Retângulo</option><option value="quad">Quadrado</option><option value="circ">Círculo</option><option value="tri">Triângulo</option></select></div>
+<div id="area_fields"></div>
+<button class="calc-btn" onclick="calcArea()">Calcular</button>
+<div class="result-box" id="r_area">
+  <div class="result-highlight" id="area_res"></div>
+  <div class="result-row"><span class="label">Área</span><span id="area_a"></span></div>
+  <div class="result-row"><span class="label">Perímetro</span><span id="area_p"></span></div>
+</div>`,
+
+recibo: `
+<div class="form-row">
+  <div class="form-group"><label>Quem pagou</label><input type="text" id="rec_pag" placeholder="João Silva"></div>
+  <div class="form-group"><label>Quem recebeu</label><input type="text" id="rec_rec" placeholder="Maria Costa MEI"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Valor (R$)</label><input type="number" id="rec_val" placeholder="1500"></div>
+  <div class="form-group"><label>Data</label><input type="date" id="rec_data"></div>
+</div>
+<div class="form-group"><label>Referente a</label><input type="text" id="rec_ref" placeholder="Serviços de design gráfico — fevereiro/2025"></div>
+<button class="calc-btn" onclick="gerarRecibo()">Gerar Recibo</button>
+<div class="contrato-area" id="r_rec"></div>
+<button class="pdf-btn" id="rec_pdf_btn" style="display:none" onclick="copiarTexto('r_rec')">📋 Copiar texto do recibo</button>`,
+
+contrato_servico: `
+<div class="form-row">
+  <div class="form-group"><label>Nome do Contratante</label><input type="text" id="cs_cont" placeholder="João Silva ou Empresa XYZ"></div>
+  <div class="form-group"><label>CPF/CNPJ Contratante</label><input type="text" id="cs_cpf1" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Nome do Prestador</label><input type="text" id="cs_prest" placeholder="Maria Costa MEI"></div>
+  <div class="form-group"><label>CPF/CNPJ Prestador</label><input type="text" id="cs_cpf2" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-group"><label>Descrição do Serviço</label><input type="text" id="cs_serv" placeholder="Desenvolvimento de site institucional"></div>
+<div class="form-row">
+  <div class="form-group"><label>Valor Total (R$)</label><input type="number" id="cs_val" placeholder="2500"></div>
+  <div class="form-group"><label>Prazo</label><input type="text" id="cs_prazo" placeholder="30 dias corridos"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Forma de pagamento</label><input type="text" id="cs_pgto" placeholder="50% início, 50% entrega"></div>
+  <div class="form-group"><label>Cidade/Estado</label><input type="text" id="cs_cid" placeholder="São Paulo/SP"></div>
+</div>
+<button class="calc-btn" onclick="gerarContrato('servico')">📄 Gerar Contrato</button>
+<div class="contrato-area" id="r_cs"></div>
+<button class="pdf-btn" id="cs_pdf" style="display:none" onclick="copiarTexto('r_cs')">📋 Copiar Contrato</button>`,
+
+contrato_aluguel: `
+<div class="form-row">
+  <div class="form-group"><label>Nome do Locador (dono)</label><input type="text" id="ca_loc" placeholder="Carlos Pereira"></div>
+  <div class="form-group"><label>CPF Locador</label><input type="text" id="ca_cpf1" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Nome do Locatário</label><input type="text" id="ca_lot" placeholder="Ana Lima"></div>
+  <div class="form-group"><label>CPF Locatário</label><input type="text" id="ca_cpf2" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-group"><label>Endereço do Imóvel</label><input type="text" id="ca_end" placeholder="Rua das Flores, 123, Apto 45, São Paulo/SP"></div>
+<div class="form-row">
+  <div class="form-group"><label>Valor do Aluguel (R$)</label><input type="number" id="ca_val" placeholder="1200"></div>
+  <div class="form-group"><label>Vencimento</label><input type="text" id="ca_venc" placeholder="Todo dia 10"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Duração</label><input type="text" id="ca_dur" placeholder="12 meses"></div>
+  <div class="form-group"><label>Cidade/Estado</label><input type="text" id="ca_cid" placeholder="São Paulo/SP"></div>
+</div>
+<button class="calc-btn" onclick="gerarContrato('aluguel')">📄 Gerar Contrato</button>
+<div class="contrato-area" id="r_ca"></div>
+<button class="pdf-btn" id="ca_pdf" style="display:none" onclick="copiarTexto('r_ca')">📋 Copiar Contrato</button>`,
+
+qrcode: `
+<div class="form-row">
+  <div class="form-group"><label>Chave PIX</label><input type="text" id="pix_chave" placeholder="email@email.com ou CPF"></div>
+  <div class="form-group"><label>Valor (R$) — opcional</label><input type="number" id="pix_val" placeholder="0" step="0.01"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Nome do recebedor</label><input type="text" id="pix_nome" placeholder="João Silva"></div>
+  <div class="form-group"><label>Cidade</label><input type="text" id="pix_cid" placeholder="São Paulo"></div>
+</div>
+<div class="form-group"><label>Descrição (opcional)</label><input type="text" id="pix_desc" placeholder="Pagamento referente a..."></div>
+<button class="calc-btn" onclick="gerarPix()">⚡ Gerar código PIX</button>
+<div class="result-box" id="r_pix" style="display:none">
+  <div class="result-sub">Código PIX Copia e Cola gerado:</div>
+  <div id="pix_code" style="font-family:'JetBrains Mono',monospace;font-size:11px;word-break:break-all;padding:10px;background:var(--bg3);border-radius:8px;margin:10px 0;line-height:1.8"></div>
+  <button class="pdf-btn" onclick="copiarPix()">📋 Copiar código PIX</button>
+  <div style="font-size:11px;color:var(--text3);margin-top:8px">⚠️ Use em testes. Para cobranças reais use o app do seu banco.</div>
+</div>`,
+
+calorias: `
+<div class="form-row">
+  <div class="form-group"><label>Peso (kg)</label><input type="number" id="cal_p" placeholder="70"></div>
+  <div class="form-group"><label>Altura (cm)</label><input type="number" id="cal_a" placeholder="170"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Idade</label><input type="number" id="cal_id" placeholder="30"></div>
+  <div class="form-group"><label>Sexo</label><select id="cal_sex"><option value="m">Masculino</option><option value="f">Feminino</option></select></div>
+</div>
+<div class="form-group"><label>Nível de atividade</label><select id="cal_at"><option value="1.2">Sedentário (sem exercício)</option><option value="1.375">Levemente ativo (1-3x/semana)</option><option value="1.55">Moderadamente ativo (3-5x/semana)</option><option value="1.725">Muito ativo (6-7x/semana)</option><option value="1.9">Extremamente ativo (2x/dia)</option></select></div>
+<button class="calc-btn" onclick="calcCalorias()">Calcular</button>
+<div class="result-box" id="r_cal">
+  <div class="result-highlight" id="cal_res"></div>
+  <div class="result-sub">calorias por dia para manter o peso</div>
+  <div class="result-row"><span class="label">Para emagrecer (-500 kcal)</span><span id="cal_emag"></span></div>
+  <div class="result-row"><span class="label">Para ganhar massa (+300 kcal)</span><span id="cal_gan"></span></div>
+  <div class="result-row"><span class="label">Taxa metabólica basal (TMB)</span><span id="cal_tmb"></span></div>
+</div>`,
+
+aposentadoria: `
+<div class="form-row">
+  <div class="form-group"><label>Idade atual</label><input type="number" id="ap_idade" placeholder="35"></div>
+  <div class="form-group"><label>Idade para aposentar</label><input type="number" id="ap_apos" placeholder="65"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Renda desejada/mês (R$)</label><input type="number" id="ap_renda" placeholder="5000"></div>
+  <div class="form-group"><label>Taxa de rendimento/mês (%)</label><input type="number" id="ap_taxa" placeholder="0.8" step="0.1"></div>
+</div>
+<div class="form-group"><label>Patrimônio atual (R$)</label><input type="number" id="ap_atual" placeholder="0" value="0"></div>
+<button class="calc-btn" onclick="calcAposentadoria()">Simular</button>
+<div class="result-box" id="r_ap">
+  <div class="result-highlight" id="ap_mensal"></div>
+  <div class="result-sub">aporte mensal necessário</div>
+  <div class="result-row"><span class="label">Anos até aposentadoria</span><span id="ap_anos"></span></div>
+  <div class="result-row"><span class="label">Patrimônio necessário</span><span id="ap_patrim"></span></div>
+  <div class="result-row"><span class="label">Total que você vai investir</span><span id="ap_total"></span></div>
+</div>`,
+
+desconto: `
+<div class="form-row">
+  <div class="form-group"><label>Preço original (R$)</label><input type="number" id="desc_orig" placeholder="199.90"></div>
+  <div class="form-group"><label>Desconto</label><input type="number" id="desc_val" placeholder="20"></div>
+</div>
+<div class="form-group"><label>Tipo</label><select id="desc_tipo"><option value="pct">Percentual (%)</option><option value="fixo">Valor fixo (R$)</option></select></div>
+<button class="calc-btn" onclick="calcDesconto()">Calcular</button>
+<div class="result-box" id="r_desc">
+  <div class="result-highlight" id="desc_final"></div>
+  <div class="result-sub">Preço final após desconto</div>
+  <div class="result-row"><span class="label">Preço original</span><span id="desc_o"></span></div>
+  <div class="result-row"><span class="label">Desconto aplicado</span><span id="desc_d"></span></div>
+  <div class="result-row"><span class="label">Você economiza</span><span id="desc_eco"></span></div>
+</div>`,
+
+};
+  // CONTRATOS JURÍDICOS
+  bodies['contrato_nda'] = `
+<div class="form-row">
+  <div class="form-group"><label>Parte 1 (Divulgadora)</label><input type="text" id="nda_p1" placeholder="Empresa ABC Ltda ou João Silva"></div>
+  <div class="form-group"><label>CPF/CNPJ Parte 1</label><input type="text" id="nda_c1" placeholder="00.000.000/0001-00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Parte 2 (Receptora)</label><input type="text" id="nda_p2" placeholder="Empresa XYZ ou Maria Costa"></div>
+  <div class="form-group"><label>CPF/CNPJ Parte 2</label><input type="text" id="nda_c2" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-group"><label>Objetivo do compartilhamento</label><input type="text" id="nda_obj" placeholder="Avaliação de parceria comercial para desenvolvimento de software"></div>
+<div class="form-row">
+  <div class="form-group"><label>Vigência</label><input type="text" id="nda_vig" placeholder="2 anos"></div>
+  <div class="form-group"><label>Cidade/Estado</label><input type="text" id="nda_cid" placeholder="São Paulo/SP"></div>
+</div>
+<button class="calc-btn" onclick="gerarJuridico('nda')">📄 Gerar NDA</button>
+<div class="contrato-area" id="r_nda"></div>
+<button class="pdf-btn" id="nda_pdf" style="display:none" onclick="copiarTexto('r_nda')">📋 Copiar Contrato</button>`;
+
+  bodies['contrato_socio'] = `
+<div class="form-row">
+  <div class="form-group"><label>Nome da Empresa</label><input type="text" id="soc_emp" placeholder="Empresa ABC Ltda"></div>
+  <div class="form-group"><label>CNPJ (se houver)</label><input type="text" id="soc_cnpj" placeholder="00.000.000/0001-00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Sócio 1 — Nome</label><input type="text" id="soc_s1" placeholder="João Silva"></div>
+  <div class="form-group"><label>Participação Sócio 1 (%)</label><input type="number" id="soc_p1" placeholder="60"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Sócio 2 — Nome</label><input type="text" id="soc_s2" placeholder="Maria Costa"></div>
+  <div class="form-group"><label>Participação Sócio 2 (%)</label><input type="number" id="soc_p2" placeholder="40"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Objeto social</label><input type="text" id="soc_obj" placeholder="Desenvolvimento e venda de software"></div>
+  <div class="form-group"><label>Cidade/Estado</label><input type="text" id="soc_cid" placeholder="São Paulo/SP"></div>
+</div>
+<button class="calc-btn" onclick="gerarJuridico('socio')">📄 Gerar Acordo de Sócios</button>
+<div class="contrato-area" id="r_socio"></div>
+<button class="pdf-btn" id="socio_pdf" style="display:none" onclick="copiarTexto('r_socio')">📋 Copiar Contrato</button>`;
+
+  bodies['contrato_trabalho'] = `
+<div class="form-row">
+  <div class="form-group"><label>Nome da Empresa (Empregadora)</label><input type="text" id="clt_emp" placeholder="Empresa XYZ Ltda"></div>
+  <div class="form-group"><label>CNPJ</label><input type="text" id="clt_cnpj" placeholder="00.000.000/0001-00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Nome do Empregado</label><input type="text" id="clt_emp2" placeholder="João Silva"></div>
+  <div class="form-group"><label>CPF</label><input type="text" id="clt_cpf" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Cargo / Função</label><input type="text" id="clt_cargo" placeholder="Analista de Marketing"></div>
+  <div class="form-group"><label>Salário Bruto (R$)</label><input type="number" id="clt_sal" placeholder="3500"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Jornada de trabalho</label><input type="text" id="clt_jorn" placeholder="44h semanais, seg a sex 08h-17h"></div>
+  <div class="form-group"><label>Data de início</label><input type="date" id="clt_ini"></div>
+</div>
+<div class="form-group"><label>Cidade/Estado</label><input type="text" id="clt_cid" placeholder="São Paulo/SP"></div>
+<button class="calc-btn" onclick="gerarJuridico('trabalho')">📄 Gerar Contrato CLT</button>
+<div class="contrato-area" id="r_trabalho"></div>
+<button class="pdf-btn" id="trabalho_pdf" style="display:none" onclick="copiarTexto('r_trabalho')">📋 Copiar Contrato</button>`;
+
+  bodies['contrato_estagio'] = `
+<div class="form-row">
+  <div class="form-group"><label>Nome da Empresa</label><input type="text" id="est_emp" placeholder="Empresa ABC Ltda"></div>
+  <div class="form-group"><label>Nome do Estagiário</label><input type="text" id="est_nome" placeholder="Pedro Souza"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Instituição de Ensino</label><input type="text" id="est_inst" placeholder="Universidade Federal de SP"></div>
+  <div class="form-group"><label>Curso</label><input type="text" id="est_curso" placeholder="Administração de Empresas"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Bolsa mensal (R$)</label><input type="number" id="est_bolsa" placeholder="1200"></div>
+  <div class="form-group"><label>Carga horária</label><input type="text" id="est_ch" placeholder="20h semanais"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Duração</label><input type="text" id="est_dur" placeholder="12 meses"></div>
+  <div class="form-group"><label>Cidade/Estado</label><input type="text" id="est_cid" placeholder="São Paulo/SP"></div>
+</div>
+<button class="calc-btn" onclick="gerarJuridico('estagio')">📄 Gerar Contrato de Estágio</button>
+<div class="contrato-area" id="r_estagio"></div>
+<button class="pdf-btn" id="estagio_pdf" style="display:none" onclick="copiarTexto('r_estagio')">📋 Copiar Contrato</button>`;
+
+  bodies['contrato_emprestimo'] = `
+<div class="form-row">
+  <div class="form-group"><label>Credor (quem empresta)</label><input type="text" id="emp_cred" placeholder="João Silva"></div>
+  <div class="form-group"><label>CPF Credor</label><input type="text" id="emp_cpf1" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Devedor (quem pega)</label><input type="text" id="emp_dev" placeholder="Maria Costa"></div>
+  <div class="form-group"><label>CPF Devedor</label><input type="text" id="emp_cpf2" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Valor emprestado (R$)</label><input type="number" id="emp_val" placeholder="5000"></div>
+  <div class="form-group"><label>Juros mensais (%)</label><input type="number" id="emp_juros" placeholder="0" value="0" step="0.1"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Prazo para pagamento</label><input type="text" id="emp_prazo" placeholder="6 meses ou até 31/12/2025"></div>
+  <div class="form-group"><label>Cidade/Estado</label><input type="text" id="emp_cid" placeholder="São Paulo/SP"></div>
+</div>
+<button class="calc-btn" onclick="gerarJuridico('emprestimo')">📄 Gerar Contrato de Empréstimo</button>
+<div class="contrato-area" id="r_emprestimo"></div>
+<button class="pdf-btn" id="emprestimo_pdf" style="display:none" onclick="copiarTexto('r_emprestimo')">📋 Copiar Contrato</button>`;
+
+  bodies['contrato_honorarios'] = `
+<div class="form-row">
+  <div class="form-group"><label>Nome do Advogado / Escritório</label><input type="text" id="hon_adv" placeholder="Dr. Carlos Pereira OAB/SP 123.456"></div>
+  <div class="form-group"><label>OAB</label><input type="text" id="hon_oab" placeholder="OAB/SP 123.456"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Nome do Cliente</label><input type="text" id="hon_cli" placeholder="João Silva ou Empresa ABC"></div>
+  <div class="form-group"><label>CPF/CNPJ Cliente</label><input type="text" id="hon_cpf" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-group"><label>Objeto / Matéria Jurídica</label><input type="text" id="hon_obj" placeholder="Ação trabalhista de reconhecimento de vínculo empregatício"></div>
+<div class="form-row">
+  <div class="form-group"><label>Honorários (R$)</label><input type="number" id="hon_val" placeholder="5000"></div>
+  <div class="form-group"><label>Forma de pagamento</label><input type="text" id="hon_pgto" placeholder="30% início, 70% êxito"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>% sobre êxito (se houver)</label><input type="number" id="hon_exito" placeholder="20" value="0"></div>
+  <div class="form-group"><label>Cidade/Estado</label><input type="text" id="hon_cid" placeholder="São Paulo/SP"></div>
+</div>
+<button class="calc-btn" onclick="gerarJuridico('honorarios')">📄 Gerar Contrato de Honorários</button>
+<div class="contrato-area" id="r_honorarios"></div>
+<button class="pdf-btn" id="honorarios_pdf" style="display:none" onclick="copiarTexto('r_honorarios')">📋 Copiar Contrato</button>`;
+
+  bodies['contrato_comodato'] = `
+<div class="form-row">
+  <div class="form-group"><label>Comodante (dono do bem)</label><input type="text" id="com_p1" placeholder="João Silva"></div>
+  <div class="form-group"><label>CPF Comodante</label><input type="text" id="com_c1" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Comodatário (quem usa)</label><input type="text" id="com_p2" placeholder="Maria Costa"></div>
+  <div class="form-group"><label>CPF Comodatário</label><input type="text" id="com_c2" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-group"><label>Descrição do bem emprestado</label><input type="text" id="com_bem" placeholder="Notebook Dell Inspiron 15, série 12345"></div>
+<div class="form-row">
+  <div class="form-group"><label>Finalidade do uso</label><input type="text" id="com_fin" placeholder="Uso profissional em home office"></div>
+  <div class="form-group"><label>Prazo</label><input type="text" id="com_prazo" placeholder="6 meses"></div>
+</div>
+<div class="form-group"><label>Cidade/Estado</label><input type="text" id="com_cid" placeholder="São Paulo/SP"></div>
+<button class="calc-btn" onclick="gerarJuridico('comodato')">📄 Gerar Contrato de Comodato</button>
+<div class="contrato-area" id="r_comodato"></div>
+<button class="pdf-btn" id="comodato_pdf" style="display:none" onclick="copiarTexto('r_comodato')">📋 Copiar Contrato</button>`;
+
+  bodies['contrato_representacao'] = `
+<div class="form-row">
+  <div class="form-group"><label>Empresa Representada</label><input type="text" id="rep_emp" placeholder="Indústria ABC Ltda"></div>
+  <div class="form-group"><label>CNPJ</label><input type="text" id="rep_cnpj" placeholder="00.000.000/0001-00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Representante Comercial</label><input type="text" id="rep_rep" placeholder="João Silva REP"></div>
+  <div class="form-group"><label>CPF/CNPJ</label><input type="text" id="rep_cpf" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Região de atuação</label><input type="text" id="rep_reg" placeholder="Estado de São Paulo"></div>
+  <div class="form-group"><label>Comissão (%)</label><input type="number" id="rep_com" placeholder="5"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Produtos / Linha representada</label><input type="text" id="rep_prod" placeholder="Linha completa de ferramentas industriais"></div>
+  <div class="form-group"><label>Cidade/Estado</label><input type="text" id="rep_cid" placeholder="São Paulo/SP"></div>
+</div>
+<button class="calc-btn" onclick="gerarJuridico('representacao')">📄 Gerar Contrato</button>
+<div class="contrato-area" id="r_representacao"></div>
+<button class="pdf-btn" id="representacao_pdf" style="display:none" onclick="copiarTexto('r_representacao')">📋 Copiar Contrato</button>`;
+
+  bodies['contrato_cessao'] = `
+<div class="form-row">
+  <div class="form-group"><label>Cedente (criador da obra)</label><input type="text" id="ces_ced" placeholder="Maria Costa — Designer"></div>
+  <div class="form-group"><label>CPF Cedente</label><input type="text" id="ces_cpf1" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Cessionário (quem recebe)</label><input type="text" id="ces_ces" placeholder="Empresa ABC Ltda"></div>
+  <div class="form-group"><label>CPF/CNPJ</label><input type="text" id="ces_cpf2" placeholder="00.000.000/0001-00"></div>
+</div>
+<div class="form-group"><label>Descrição da obra / direito cedido</label><input type="text" id="ces_obra" placeholder="Logotipo, manual de identidade visual e todos os arquivos criados"></div>
+<div class="form-row">
+  <div class="form-group"><label>Valor da cessão (R$)</label><input type="number" id="ces_val" placeholder="3000"></div>
+  <div class="form-group"><label>Tipo de cessão</label><select id="ces_tipo"><option value="total">Total e definitiva</option><option value="parcial">Parcial (uso específico)</option></select></div>
+</div>
+<div class="form-group"><label>Cidade/Estado</label><input type="text" id="ces_cid" placeholder="São Paulo/SP"></div>
+<button class="calc-btn" onclick="gerarJuridico('cessao')">📄 Gerar Termo de Cessão</button>
+<div class="contrato-area" id="r_cessao"></div>
+<button class="pdf-btn" id="cessao_pdf" style="display:none" onclick="copiarTexto('r_cessao')">📋 Copiar Contrato</button>`;
+
+  bodies['contrato_franquia'] = `
+<div class="form-row">
+  <div class="form-group"><label>Franqueador</label><input type="text" id="fra_fr" placeholder="Rede ABC Franquias Ltda"></div>
+  <div class="form-group"><label>CNPJ Franqueador</label><input type="text" id="fra_cnpj1" placeholder="00.000.000/0001-00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Franqueado</label><input type="text" id="fra_fra" placeholder="João Silva ou Empresa XYZ"></div>
+  <div class="form-group"><label>CPF/CNPJ Franqueado</label><input type="text" id="fra_cnpj2" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Taxa de franquia (R$)</label><input type="number" id="fra_taxa" placeholder="30000"></div>
+  <div class="form-group"><label>Royalties mensais (%)</label><input type="number" id="fra_roy" placeholder="5"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Território exclusivo</label><input type="text" id="fra_terr" placeholder="Cidade de Campinas/SP"></div>
+  <div class="form-group"><label>Prazo do contrato</label><input type="text" id="fra_prazo" placeholder="5 anos"></div>
+</div>
+<div class="form-group"><label>Cidade/Estado</label><input type="text" id="fra_cid" placeholder="São Paulo/SP"></div>
+<button class="calc-btn" onclick="gerarJuridico('franquia')">📄 Gerar Contrato de Franquia</button>
+<div class="contrato-area" id="r_franquia"></div>
+<button class="pdf-btn" id="franquia_pdf" style="display:none" onclick="copiarTexto('r_franquia')">📋 Copiar Contrato</button>`;
+
+  bodies['contrato_permuta'] = `
+<div class="form-row">
+  <div class="form-group"><label>Parte 1</label><input type="text" id="per_p1" placeholder="João Silva"></div>
+  <div class="form-group"><label>CPF Parte 1</label><input type="text" id="per_c1" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Parte 2</label><input type="text" id="per_p2" placeholder="Maria Costa"></div>
+  <div class="form-group"><label>CPF Parte 2</label><input type="text" id="per_c2" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-group"><label>O que a Parte 1 entrega</label><input type="text" id="per_b1" placeholder="Serviços de desenvolvimento de site avaliados em R$5.000"></div>
+<div class="form-group"><label>O que a Parte 2 entrega</label><input type="text" id="per_b2" placeholder="Serviços de contabilidade por 12 meses avaliados em R$5.000"></div>
+<div class="form-group"><label>Cidade/Estado</label><input type="text" id="per_cid" placeholder="São Paulo/SP"></div>
+<button class="calc-btn" onclick="gerarJuridico('permuta')">📄 Gerar Contrato de Permuta</button>
+<div class="contrato-area" id="r_permuta"></div>
+<button class="pdf-btn" id="permuta_pdf" style="display:none" onclick="copiarTexto('r_permuta')">📋 Copiar Contrato</button>`;
+
+  bodies['contrato_fianca'] = `
+<div class="form-row">
+  <div class="form-group"><label>Locador (proprietário)</label><input type="text" id="fia_loc" placeholder="Carlos Pereira"></div>
+  <div class="form-group"><label>Locatário (inquilino)</label><input type="text" id="fia_lot" placeholder="Ana Lima"></div>
+</div>
+<div class="form-row">
+  <div class="form-group"><label>Fiador</label><input type="text" id="fia_fia" placeholder="Pedro Costa"></div>
+  <div class="form-group"><label>CPF Fiador</label><input type="text" id="fia_cpf" placeholder="000.000.000-00"></div>
+</div>
+<div class="form-group"><label>Endereço do imóvel alugado</label><input type="text" id="fia_end" placeholder="Rua das Flores, 123, Apto 45, São Paulo/SP"></div>
+<div class="form-row">
+  <div class="form-group"><label>Valor do aluguel (R$)</label><input type="number" id="fia_val" placeholder="1500"></div>
+  <div class="form-group"><label>Cidade/Estado</label><input type="text" id="fia_cid" placeholder="São Paulo/SP"></div>
+</div>
+<button class="calc-btn" onclick="gerarJuridico('fianca')">📄 Gerar Contrato de Fiança</button>
+<div class="contrato-area" id="r_fianca"></div>
+<button class="pdf-btn" id="fianca_pdf" style="display:none" onclick="copiarTexto('r_fianca')">📋 Copiar Contrato</button>`;
+
+  const body = bodies[id];
+  if(!body) return modalWrap(t,`<p style="color:var(--text2);text-align:center;padding:2rem">Ferramenta em construção 🔨</p>`);
+  return modalWrap(t, body);
+}
+
+// ═══════════════════════════════════════
+// LÓGICA DAS CALCULADORAS
+// ═══════════════════════════════════════
+const R = v => 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const show = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
+const showBox = id => { const el=document.getElementById(id); if(el){el.classList.add('show');el.style.display='block';} };
+
+function calcFGTS(){
+  const sal=+document.getElementById('fgts_sal').value||0;
+  const mes=+document.getElementById('fgts_meses').value||0;
+  const pct=+document.getElementById('fgts_pct').value/100;
+  const saldo=+document.getElementById('fgts_saldo').value||0;
+  const dep=sal*pct*mes;
+  const multa=dep*0.4;
+  const total=dep+multa+saldo;
+  show('fgts_dep',R(dep)); show('fgts_multa',R(multa));
+  show('fgts_ini',R(saldo)); show('fgts_final',R(total));
+  show('fgts_total',R(total)); showBox('r_fgts');
+}
+
+function calcFin(){
+  const val=+document.getElementById('fin_val').value||0;
+  const ent=+document.getElementById('fin_ent').value||0;
+  const taxa=+document.getElementById('fin_taxa').value/100||0.008;
+  const n=+document.getElementById('fin_meses').value||360;
+  const sis=document.getElementById('fin_sistema').value;
+  const pv=val-ent;
+  let parc,total,juros,parc1;
+  if(sis==='price'){
+    parc=pv*(taxa*Math.pow(1+taxa,n))/(Math.pow(1+taxa,n)-1);
+    total=parc*n; juros=total-pv; parc1=parc;
+    show('fin_sistema_label','Tabela Price — parcelas fixas');
+  } else {
+    const amort=pv/n;
+    parc1=amort+pv*taxa;
+    const parcUlt=amort+(pv-amort*(n-1))*taxa;
+    parc=(parc1+parcUlt)/2;
+    total=parc*n; juros=total-pv;
+    show('fin_sistema_label','SAC — parcelas decrescentes');
+  }
+  show('fin_parcela',R(parc)); show('fin_financiado',R(pv));
+  show('fin_juros',R(juros)); show('fin_custo',R(val-ent+ent+juros));
+  show('fin_parc1',R(parc1)); showBox('r_fin');
+}
+
+function calcJuros(){
+  const c=+document.getElementById('ji_cap').value||0;
+  const t=+document.getElementById('ji_taxa').value/100||0;
+  const n=+document.getElementById('ji_meses').value||0;
+  const a=+document.getElementById('ji_aporte').value||0;
+  let m=c*Math.pow(1+t,n);
+  if(a>0) m+=a*(Math.pow(1+t,n)-1)/t;
+  const cap=c+a*n; const ganho=m-cap;
+  show('juros_final',R(m)); show('juros_cap',R(cap));
+  show('juros_ganho',R(ganho)); show('juros_rent',(ganho/cap*100).toFixed(2)+'%');
+  showBox('r_juros');
+}
+
+function calcSalario(){
+  const b=+document.getElementById('sal_bruto').value||0;
+  const dep=+document.getElementById('sal_dep').value||0;
+  let inss=0;
+  if(b<=1412) inss=b*.075;
+  else if(b<=2666.68) inss=b*.09;
+  else if(b<=4000.03) inss=b*.12;
+  else if(b<=7786.02) inss=b*.14;
+  else inss=1091.52;
+  const base_ir=b-inss-dep*189.59;
+  let irrf=0;
+  if(base_ir>2259.20){
+    if(base_ir<=2826.65) irrf=base_ir*.075-169.44;
+    else if(base_ir<=3751.05) irrf=base_ir*.15-381.44;
+    else if(base_ir<=4664.68) irrf=base_ir*.225-662.77;
+    else irrf=base_ir*.275-896.00;
+  }
+  const liq=b-inss-irrf;
+  show('sal_b',R(b)); show('sal_inss',R(inss));
+  show('sal_irrf',R(irrf)); show('sal_l',R(liq)); show('sal_liq',R(liq));
+  showBox('r_sal');
+}
+
+function calcMEI(){
+  const fat=+document.getElementById('mei_fat').value||0;
+  const tipo=document.getElementById('mei_tipo').value;
+  const lim=144900;
+  const das={comercio:67.90,servico:71.90,industria:72.90}[tipo];
+  const anual=fat*12;
+  const pct=(anual/lim*100).toFixed(1);
+  const status=anual<=lim?'✅ Dentro do limite MEI':'⚠️ ACIMA DO LIMITE — Risco de desenquadramento';
+  show('mei_das',R(das));
+  show('mei_f',R(fat)); show('mei_lim',R(lim));
+  show('mei_anual',R(anual)); show('mei_pct',pct+'%'); show('mei_status',status);
+  showBox('r_mei');
+}
+
+function calcFreelancer(){
+  const sal=+document.getElementById('free_sal').value||0;
+  const hs=+document.getElementById('free_horas').value||160;
+  const custos=+document.getElementById('free_custos').value||0;
+  const imp=+document.getElementById('free_imp').value/100||0.15;
+  const total=(sal+custos)/(1-imp);
+  const hora_min=total/hs;
+  const hora_rec=hora_min*1.3;
+  show('free_total',R(total)); show('free_hora',R(hora_min));
+  show('free_min',R(hora_min)); show('free_rec',R(hora_rec));
+  show('free_proj',R(hora_rec*10)); showBox('r_free');
+}
+
+function calcRescisao(){
+  const sal=+document.getElementById('res_sal').value||0;
+  const mes=+document.getElementById('res_meses').value||0;
+  const dias=+document.getElementById('res_dias').value||0;
+  const tipo=document.getElementById('res_tipo').value;
+  const saldo=(sal/30)*dias;
+  const treze=(sal/12)*(mes%12||12);
+  const ferias=(sal/12)*(mes%12||12)*(4/3);
+  const aviso=tipo==='semcausa'?sal:0;
+  const fgts_dep=sal*0.08*mes;
+  const multa=tipo==='semcausa'?fgts_dep*0.4:0;
+  const total=saldo+treze+ferias+aviso+multa;
+  show('res_saldo',R(saldo)); show('res_13',R(treze));
+  show('res_ferias',R(ferias)); show('res_aviso',tipo==='semcausa'?R(aviso):'R$ 0,00');
+  show('res_multa',R(multa)); show('res_tot',R(total)); show('res_total',R(total));
+  showBox('r_res');
+}
+
+function calcMargem(){
+  const modo=document.getElementById('mg_modo').value;
+  const v1=+document.getElementById('mg_v1').value||0;
+  const v2=+document.getElementById('mg_v2').value||0;
+  let custo,venda,lucro,markup;
+  if(modo==='venda'){
+    custo=v1; venda=custo/(1-v2/100);
+  } else {
+    venda=v1; custo=venda*(1-v2/100);
+  }
+  lucro=venda-custo; markup=(lucro/custo*100).toFixed(1);
+  show('mg_res',R(modo==='venda'?venda:lucro/venda*100+'%'));
+  show('mg_sub',modo==='venda'?'Preço de venda sugerido':'Margem de lucro');
+  show('mg_custo',R(custo)); show('mg_venda',R(venda));
+  show('mg_lucro',R(lucro)); show('mg_markup',markup+'%');
+  showBox('r_mg');
+}
+function alternarModo(){
+  const m=document.getElementById('mg_modo').value;
+  document.getElementById('mg_l1').textContent=m==='venda'?'Custo do produto (R$)':'Preço de venda (R$)';
+  document.getElementById('mg_l2').textContent=m==='venda'?'Margem desejada (%)':'(calculada automaticamente)';
+}
+
+function gerarSenha(){
+  const len=+document.getElementById('pw_len').value||16;
+  const qty=+document.getElementById('pw_qty').value||5;
+  let chars='';
+  if(document.getElementById('pw_upper').checked) chars+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if(document.getElementById('pw_lower').checked) chars+='abcdefghijklmnopqrstuvwxyz';
+  if(document.getElementById('pw_num').checked) chars+='0123456789';
+  if(document.getElementById('pw_sym').checked) chars+='!@#$%^&*()-_=+[]{}';
+  if(!chars){alert('Selecione pelo menos um tipo de caractere.');return;}
+  const senhas=Array.from({length:qty},()=>Array.from({length:len},()=>chars[Math.floor(Math.random()*chars.length)]).join(''));
+  const box=document.getElementById('r_pw');
+  box.innerHTML=senhas.map(s=>`<div class="result-row" style="font-size:13px;cursor:pointer" onclick="navigator.clipboard.writeText('${s}');this.style.color='var(--green)';setTimeout(()=>this.style.color='',1500)"><span>${s}</span><span style="font-size:10px;color:var(--text3)">clique p/ copiar</span></div>`).join('');
+  box.classList.add('show'); box.style.display='block';
+}
+
+function formatDoc(el){
+  let v=el.value.replace(/\D/g,'');
+  if(v.length<=11) el.value=v.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,'$1.$2.$3-$4');
+  else el.value=v.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,'$1.$2.$3/$4-$5');
+}
+
+function validarDoc(){
+  const v=document.getElementById('doc_val').value.replace(/\D/g,'');
+  let ok=false,tipo='';
+  if(v.length===11){
+    tipo='CPF'; ok=validaCPF(v);
+  } else if(v.length===14){
+    tipo='CNPJ'; ok=validaCNPJ(v);
+  } else {tipo='Documento';ok=false;}
+  const box=document.getElementById('r_doc');
+  document.getElementById('doc_res').textContent=ok?'✅ Válido':'❌ Inválido';
+  document.getElementById('doc_res').style.color=ok?'var(--green)':'var(--red)';
+  document.getElementById('doc_sub').textContent=tipo+(ok?' matematicamente correto':' inválido ou com dígitos errados');
+  box.style.display='block';
+}
+
+function validaCPF(c){
+  if(c.length!==11||/^(\d)\1+$/.test(c)) return false;
+  let s=0;
+  for(let i=0;i<9;i++) s+=parseInt(c[i])*(10-i);
+  let r=11-(s%11); if(r>=10) r=0;
+  if(r!==parseInt(c[9])) return false;
+  s=0; for(let i=0;i<10;i++) s+=parseInt(c[i])*(11-i);
+  r=11-(s%11); if(r>=10) r=0;
+  return r===parseInt(c[10]);
+}
+
+function validaCNPJ(c){
+  if(c.length!==14||/^(\d)\1+$/.test(c)) return false;
+  const calc=(w,n)=>{let s=0,p=n;for(let i=0;i<w;i++){s+=parseInt(c[i])*p--;if(p<2)p=9;}let r=s%11;return r<2?0:11-r;};
+  return calc(12,5)===parseInt(c[12])&&calc(13,6)===parseInt(c[13]);
+}
+
+function calcPct(){
+  const op=document.getElementById('pct_op').value;
+  const v1=+document.getElementById('pct_v1').value||0;
+  const v2=+document.getElementById('pct_v2').value||0;
+  let res=0,sub='';
+  if(op==='pct'){res=v2*v1/100;sub=`${v1}% de ${R(v2)} = ${R(res)}`;}
+  else if(op==='aumento'){res=v2*(1+v1/100);sub=`${R(v2)} com aumento de ${v1}%`;}
+  else if(op==='desconto'){res=v2*(1-v1/100);sub=`${R(v2)} com desconto de ${v1}%`;}
+  else{res=((v2-v1)/v1*100);sub=`Variação de ${R(v1)} para ${R(v2)}`;}
+  show('pct_res',op==='variacao'?res.toFixed(2)+'%':R(res));
+  show('pct_sub',sub); showBox('r_pct');
+}
+
+function calcHoras(){
+  const ent=document.getElementById('hr_ent').value.split(':').map(Number);
+  const sai=document.getElementById('hr_sai').value.split(':').map(Number);
+  const int=+document.getElementById('hr_int').value||0;
+  const dias=+document.getElementById('hr_dias').value||1;
+  const val=+document.getElementById('hr_valor').value||0;
+  const minDia=(sai[0]*60+sai[1])-(ent[0]*60+ent[1])-int;
+  const hrDia=minDia/60;
+  const total=hrDia*dias;
+  show('hr_total',total.toFixed(1)+' horas');
+  show('hr_dia',hrDia.toFixed(1)+' horas');
+  show('hr_d',dias+' dias');
+  show('hr_rec',val?R(total*val):'Informe o valor/hora');
+  showBox('r_hr');
+}
+
+function calcIMC(){
+  const p=+document.getElementById('imc_p').value||0;
+  const a=+document.getElementById('imc_a').value/100||0;
+  const imc=p/(a*a);
+  let cls='';
+  if(imc<18.5) cls='Abaixo do peso';
+  else if(imc<25) cls='✅ Peso normal';
+  else if(imc<30) cls='Sobrepeso';
+  else if(imc<35) cls='Obesidade grau I';
+  else if(imc<40) cls='Obesidade grau II';
+  else cls='Obesidade grau III';
+  const ideal=22.5*a*a;
+  show('imc_val',imc.toFixed(1)); show('imc_class',cls);
+  show('imc_ideal',p.toFixed(1)&&R(ideal).replace('R$ ','')+'kg');
+  show('imc_diff',(p-ideal>0?'+':'')+((p-ideal).toFixed(1))+'kg');
+  showBox('r_imc');
+}
+
+function calcConv(){
+  const taxas={USD:5.05,EUR:5.50,GBP:6.40,ARS:0.0055,BRL:1};
+  const v=+document.getElementById('conv_val').value||0;
+  const de=document.getElementById('conv_de').value;
+  const para=document.getElementById('conv_para').value;
+  const brl=v/taxas[de];
+  const res=brl*taxas[para];
+  show('conv_res',res.toFixed(2)+' '+para);
+  showBox('r_conv');
+}
+
+function calcTempo(){
+  const d1=new Date(document.getElementById('dt_ini').value);
+  const d2=new Date(document.getElementById('dt_fim').value);
+  const diff=Math.abs(d2-d1);
+  const dias=Math.floor(diff/(1000*60*60*24));
+  show('dt_dias',dias); show('dt_sem',(dias/7).toFixed(1)+' semanas');
+  show('dt_mes',(dias/30.44).toFixed(1)+' meses');
+  show('dt_ano',(dias/365.25).toFixed(2)+' anos');
+  showBox('r_dt');
+}
+
+function calcComb(){
+  const gas=+document.getElementById('cb_gas').value||0;
+  const alc=+document.getElementById('cb_alc').value||0;
+  const km=+document.getElementById('cb_km').value||0;
+  const cons=+document.getElementById('cb_cons').value||1;
+  const litros=km/cons;
+  const ggas=litros*gas; const galc=litros*alc*0.7;
+  const melhor=galc<ggas?'Álcool é mais vantajoso':'Gasolina é mais vantajosa';
+  const ratio=(alc/gas*100).toFixed(1);
+  show('cb_melhor',melhor); show('cb_ratio','Relação álcool/gasolina: '+ratio+'% (compensar abaixo de 70%)');
+  show('cb_ggas',R(ggas)); show('cb_galc',R(galc));
+  show('cb_eco',R(Math.abs(ggas-galc))); showBox('r_cb');
+}
+
+function updateAreaFields(){
+  const formaEl = document.getElementById('area_forma');
+  if(!formaEl) return;
+  const f=formaEl.value;
+  const campos={
+    ret:`<div class="form-row"><div class="form-group"><label>Comprimento (m)</label><input type="number" id="a1" placeholder="10"></div><div class="form-group"><label>Largura (m)</label><input type="number" id="a2" placeholder="5"></div></div>`,
+    quad:`<div class="form-group"><label>Lado (m)</label><input type="number" id="a1" placeholder="5"></div>`,
+    circ:`<div class="form-group"><label>Raio (m)</label><input type="number" id="a1" placeholder="3"></div>`,
+    tri:`<div class="form-row"><div class="form-group"><label>Base (m)</label><input type="number" id="a1" placeholder="6"></div><div class="form-group"><label>Altura (m)</label><input type="number" id="a2" placeholder="4"></div></div>`,
+  };
+  document.getElementById('area_fields').innerHTML=campos[f]||'';
+}
+if(document.getElementById('area_fields')) updateAreaFields();
+
+function calcArea(){
+  const f=document.getElementById('area_forma').value;
+  const a1=+document.getElementById('a1').value||0;
+  const a2=document.getElementById('a2')?+document.getElementById('a2').value||0:0;
+  let area=0,peri=0,label='';
+  if(f==='ret'){area=a1*a2;peri=2*(a1+a2);label=`${a1}m × ${a2}m`;}
+  else if(f==='quad'){area=a1*a1;peri=4*a1;label=`Lado ${a1}m`;}
+  else if(f==='circ'){area=Math.PI*a1*a1;peri=2*Math.PI*a1;label=`Raio ${a1}m`;}
+  else if(f==='tri'){area=a1*a2/2;peri=a1*2+a2;label=`Base ${a1}m × Altura ${a2}m`;}
+  show('area_res',label); show('area_a',area.toFixed(2)+' m²');
+  show('area_p',peri.toFixed(2)+' m'); showBox('r_area');
+}
+
+function calcDesconto(){
+  const orig=+document.getElementById('desc_orig').value||0;
+  const val=+document.getElementById('desc_val').value||0;
+  const tipo=document.getElementById('desc_tipo').value;
+  const descv=tipo==='pct'?orig*val/100:val;
+  const final=orig-descv;
+  show('desc_final',R(final)); show('desc_o',R(orig));
+  show('desc_d',tipo==='pct'?val+'%':R(descv));
+  show('desc_eco',R(descv)); showBox('r_desc');
+}
+
+function calcCalorias(){
+  const p=+document.getElementById('cal_p').value||0;
+  const a=+document.getElementById('cal_a').value||0;
+  const id=+document.getElementById('cal_id').value||0;
+  const sex=document.getElementById('cal_sex').value;
+  const at=+document.getElementById('cal_at').value||1.2;
+  let tmb=sex==='m'?88.36+(13.4*p)+(4.8*a)-(5.7*id):447.6+(9.2*p)+(3.1*a)-(4.3*id);
+  const tdee=tmb*at;
+  show('cal_res',Math.round(tdee));
+  show('cal_emag',Math.round(tdee-500)+' kcal/dia');
+  show('cal_gan',Math.round(tdee+300)+' kcal/dia');
+  show('cal_tmb',Math.round(tmb)+' kcal/dia');
+  showBox('r_cal');
+}
+
+function calcAposentadoria(){
+  const idade=+document.getElementById('ap_idade').value||0;
+  const apos=+document.getElementById('ap_apos').value||65;
+  const renda=+document.getElementById('ap_renda').value||0;
+  const taxa=+document.getElementById('ap_taxa').value/100||0.008;
+  const atual=+document.getElementById('ap_atual').value||0;
+  const anos=apos-idade;
+  const n=anos*12;
+  const patrim=renda/taxa;
+  const fv=atual*Math.pow(1+taxa,n);
+  const falta=Math.max(0,patrim-fv);
+  const mensal=falta*taxa/(Math.pow(1+taxa,n)-1);
+  show('ap_mensal',R(mensal));
+  show('ap_anos',anos+' anos ('+n+' meses)');
+  show('ap_patrim',R(patrim));
+  show('ap_total',R(mensal*n));
+  showBox('r_ap');
+}
+
+function gerarRecibo(){
+  const pag=document.getElementById('rec_pag').value||'___';
+  const rec=document.getElementById('rec_rec').value||'___';
+  const val=+document.getElementById('rec_val').value||0;
+  const data=document.getElementById('rec_data').value;
+  const ref=document.getElementById('rec_ref').value||'___';
+  const dt=data?new Date(data+'T12:00:00').toLocaleDateString('pt-BR'):'___/___/______';
+  const num=Math.floor(Math.random()*9000)+1000;
+  const extenso=val.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+  const txt=`RECIBO DE PAGAMENTO Nº ${num}
+
+Eu, ${rec}, recebi de ${pag} a importância de ${extenso} (${extenso}), referente a: ${ref}.
+
+Data: ${dt}
+
+___________________________________
+${rec}
+(Assinatura)`;
+  const area=document.getElementById('r_rec');
+  area.textContent=txt; area.classList.add('show'); area.style.display='block';
+  document.getElementById('rec_pdf_btn').style.display='block';
+}
+
+function gerarContrato(tipo){
+  let txt='';
+  const hoje=new Date().toLocaleDateString('pt-BR');
+  if(tipo==='servico'){
+    const cont=document.getElementById('cs_cont').value||'CONTRATANTE';
+    const cpf1=document.getElementById('cs_cpf1').value||'';
+    const prest=document.getElementById('cs_prest').value||'PRESTADOR';
+    const cpf2=document.getElementById('cs_cpf2').value||'';
+    const serv=document.getElementById('cs_serv').value||'serviços';
+    const val=document.getElementById('cs_val').value||'0';
+    const prazo=document.getElementById('cs_prazo').value||'___';
+    const pgto=document.getElementById('cs_pgto').value||'___';
+    const cid=document.getElementById('cs_cid').value||'___';
+    txt=`CONTRATO DE PRESTAÇÃO DE SERVIÇOS
+
+Pelo presente instrumento particular, as partes abaixo identificadas celebram o presente Contrato de Prestação de Serviços, que se regerá pelas cláusulas e condições seguintes:
+
+CONTRATANTE: ${cont} ${cpf1?'— CPF/CNPJ: '+cpf1:''}
+CONTRATADO: ${prest} ${cpf2?'— CPF/CNPJ: '+cpf2:''}
+
+CLÁUSULA I — DO OBJETO
+O presente contrato tem por objeto a prestação dos seguintes serviços: ${serv}.
+
+CLÁUSULA II — DO PRAZO
+Os serviços deverão ser concluídos no prazo de ${prazo}, contados a partir da assinatura deste instrumento.
+
+CLÁUSULA III — DO VALOR E FORMA DE PAGAMENTO
+Pelos serviços prestados, o CONTRATANTE pagará ao CONTRATADO o valor total de R$ ${val} (${parseFloat(val).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}), da seguinte forma: ${pgto}.
+
+CLÁUSULA IV — DAS OBRIGAÇÕES DO CONTRATADO
+O CONTRATADO obriga-se a: executar os serviços com qualidade e dentro do prazo estipulado; manter sigilo sobre informações confidenciais do CONTRATANTE; cumprir as legislações vigentes aplicáveis.
+
+CLÁUSULA V — DAS OBRIGAÇÕES DO CONTRATANTE
+O CONTRATANTE obriga-se a: efetuar o pagamento nas datas acordadas; fornecer as informações e materiais necessários para a execução dos serviços; não solicitar alterações fora do escopo sem acordo prévio.
+
+CLÁUSULA VI — DA RESCISÃO
+Este contrato poderá ser rescindido por qualquer das partes, mediante notificação por escrito com antecedência mínima de 7 (sete) dias, respondendo a parte infratora pelos prejuízos causados.
+
+CLÁUSULA VII — DO FORO
+As partes elegem o foro da comarca de ${cid} para dirimir quaisquer dúvidas ou litígios oriundos do presente contrato.
+
+${cid}, ${hoje}.
+
+___________________________________     ___________________________________
+${cont}                                  ${prest}
+CONTRATANTE                              CONTRATADO
+
+Testemunha 1: _______________________   Testemunha 2: _______________________`;
+    const area=document.getElementById('r_cs');
+    area.textContent=txt; area.classList.add('show'); area.style.display='block';
+    document.getElementById('cs_pdf').style.display='block';
+  } else if(tipo==='aluguel'){
+    const loc=document.getElementById('ca_loc').value||'LOCADOR';
+    const cpf1=document.getElementById('ca_cpf1').value||'';
+    const lot=document.getElementById('ca_lot').value||'LOCATÁRIO';
+    const cpf2=document.getElementById('ca_cpf2').value||'';
+    const end=document.getElementById('ca_end').value||'___';
+    const val=document.getElementById('ca_val').value||'0';
+    const venc=document.getElementById('ca_venc').value||'___';
+    const dur=document.getElementById('ca_dur').value||'12 meses';
+    const cid=document.getElementById('ca_cid').value||'___';
+    txt=`CONTRATO DE LOCAÇÃO RESIDENCIAL
+
+Pelo presente instrumento particular, as partes celebram o presente Contrato de Locação, regido pela Lei nº 8.245/91 (Lei do Inquilinato):
+
+LOCADOR: ${loc} ${cpf1?'— CPF: '+cpf1:''}
+LOCATÁRIO: ${lot} ${cpf2?'— CPF: '+cpf2:''}
+
+CLÁUSULA I — DO IMÓVEL
+O LOCADOR cede ao LOCATÁRIO, para fins exclusivamente residenciais, o imóvel situado à: ${end}.
+
+CLÁUSULA II — DO PRAZO
+A locação terá prazo de ${dur}, iniciando-se na data da assinatura, podendo ser renovado por igual período mediante acordo.
+
+CLÁUSULA III — DO ALUGUEL
+O aluguel mensal é de R$ ${val}, a ser pago ${venc}, via PIX, transferência ou depósito bancário.
+
+CLÁUSULA IV — DOS REAJUSTES
+O aluguel será reajustado anualmente pelo índice IGP-M ou IPCA, conforme legislação vigente.
+
+CLÁUSULA V — DAS OBRIGAÇÕES DO LOCATÁRIO
+O LOCATÁRIO obriga-se a: pagar o aluguel em dia; conservar o imóvel em bom estado; não sublocar sem autorização; devolver o imóvel nas mesmas condições recebidas.
+
+CLÁUSULA VI — DAS OBRIGAÇÕES DO LOCADOR
+O LOCADOR obriga-se a: entregar o imóvel em condições de uso; garantir o uso pacífico do imóvel; realizar reparos estruturais necessários.
+
+CLÁUSULA VII — DA RESCISÃO
+Em caso de rescisão antecipada pelo LOCATÁRIO, aplica-se multa proporcional conforme Art. 4º da Lei 8.245/91.
+
+CLÁUSULA VIII — DO FORO
+Fica eleito o foro de ${cid} para dirimir quaisquer conflitos.
+
+${cid}, ${hoje}.
+
+___________________________________     ___________________________________
+${loc} — LOCADOR                         ${lot} — LOCATÁRIO
+
+Testemunha 1: _______________________   Testemunha 2: _______________________`;
+    const area=document.getElementById('r_ca');
+    area.textContent=txt; area.classList.add('show'); area.style.display='block';
+    document.getElementById('ca_pdf').style.display='block';
+  }
+}
+
+function preencherEMostrar(elId, btnId, txt){
+  const area=document.getElementById(elId);
+  area.textContent=txt; area.classList.add('show'); area.style.display='block';
+  const btn=document.getElementById(btnId);
+  if(btn) btn.style.display='block';
+}
+
+function gerarJuridico(tipo){
+  const hoje=new Date().toLocaleDateString('pt-BR');
+  const v=id=>{const el=document.getElementById(id);return el?(el.value||'___'):'___';};
+  let txt='';
+
+  if(tipo==='nda'){
+    const p1=v('nda_p1'),c1=v('nda_c1'),p2=v('nda_p2'),c2=v('nda_c2'),obj=v('nda_obj'),vig=v('nda_vig'),cid=v('nda_cid');
+    txt=`ACORDO DE CONFIDENCIALIDADE (NDA)
+
+Pelo presente instrumento particular, as partes abaixo qualificadas celebram o presente Acordo de Confidencialidade:
+
+PARTE DIVULGADORA: ${p1} — CPF/CNPJ: ${c1}
+PARTE RECEPTORA: ${p2} — CPF/CNPJ: ${c2}
+
+CLÁUSULA I — DO OBJETO
+As partes pretendem trocar informações confidenciais relacionadas a: ${obj}.
+
+CLÁUSULA II — DA DEFINIÇÃO DE INFORMAÇÃO CONFIDENCIAL
+Consideram-se confidenciais quaisquer dados técnicos, comerciais, financeiros, know-how, planos de negócio e demais informações reveladas entre as partes, verbalmente ou por escrito.
+
+CLÁUSULA III — DAS OBRIGAÇÕES
+A PARTE RECEPTORA compromete-se a: não divulgar a terceiros as informações confidenciais; utilizar as informações exclusivamente para a finalidade descrita; adotar medidas de segurança adequadas para proteção dos dados.
+
+CLÁUSULA IV — DAS EXCEÇÕES
+Não serão consideradas confidenciais as informações que: já eram de conhecimento público; foram desenvolvidas de forma independente; sejam exigidas por lei ou ordem judicial.
+
+CLÁUSULA V — DA VIGÊNCIA
+Este acordo vigorará por ${vig}, contados a partir da assinatura, permanecendo as obrigações de confidencialidade mesmo após o término.
+
+CLÁUSULA VI — DAS PENALIDADES
+O descumprimento deste acordo sujeitará a parte infratora ao pagamento de indenização por perdas e danos comprovados.
+
+CLÁUSULA VII — DO FORO
+Fica eleito o foro de ${cid} para dirimir quaisquer controvérsias.
+
+${cid}, ${hoje}.
+
+___________________________________     ___________________________________
+${p1}                                    ${p2}
+PARTE DIVULGADORA                        PARTE RECEPTORA
+
+Testemunha 1: _______________________   Testemunha 2: _______________________`;
+    preencherEMostrar('r_nda','nda_pdf',txt);
+  }
+
+  else if(tipo==='socio'){
+    const emp=v('soc_emp'),cnpj=v('soc_cnpj'),s1=v('soc_s1'),p1=v('soc_p1'),s2=v('soc_s2'),p2=v('soc_p2'),obj=v('soc_obj'),cid=v('soc_cid');
+    txt=`ACORDO DE SÓCIOS
+
+Pelo presente instrumento particular, os sócios abaixo qualificados celebram o presente Acordo de Sócios referente à empresa ${emp} ${cnpj!=='___'?'(CNPJ: '+cnpj+')':''}:
+
+SÓCIO 1: ${s1} — Participação: ${p1}%
+SÓCIO 2: ${s2} — Participação: ${p2}%
+
+CLÁUSULA I — DO OBJETO SOCIAL
+A sociedade tem como objeto: ${obj}.
+
+CLÁUSULA II — DA PARTICIPAÇÃO SOCIETÁRIA
+O capital social será dividido na proporção de ${p1}% para ${s1} e ${p2}% para ${s2}, conforme acima estabelecido.
+
+CLÁUSULA III — DA ADMINISTRAÇÃO
+A administração da sociedade caberá aos sócios em conjunto, sendo as decisões estratégicas tomadas por maioria de participação societária.
+
+CLÁUSULA IV — DA DISTRIBUIÇÃO DE LUCROS
+Os lucros e prejuízos serão distribuídos na mesma proporção das quotas sociais de cada sócio.
+
+CLÁUSULA V — DA SAÍDA DE SÓCIO
+Em caso de retirada voluntária, falecimento ou exclusão de sócio, será apurado o valor de suas quotas mediante balanço patrimonial específico, a ser pago em até 90 dias.
+
+CLÁUSULA VI — DA NÃO CONCORRÊNCIA
+Os sócios comprometem-se a não exercer atividade concorrente à da sociedade durante a vigência deste acordo e por 12 meses após sua saída.
+
+CLÁUSULA VII — DA RESOLUÇÃO DE CONFLITOS
+Eventuais divergências entre os sócios serão, preferencialmente, resolvidas por mediação antes de qualquer medida judicial.
+
+CLÁUSULA VIII — DO FORO
+Fica eleito o foro de ${cid} para dirimir quaisquer questões oriundas deste acordo.
+
+${cid}, ${hoje}.
+
+___________________________________     ___________________________________
+${s1}                                    ${s2}
+SÓCIO                                    SÓCIO
+
+Testemunha 1: _______________________   Testemunha 2: _______________________`;
+    preencherEMostrar('r_socio','socio_pdf',txt);
+  }
+
+  else if(tipo==='trabalho'){
+    const emp=v('clt_emp'),cnpj=v('clt_cnpj'),func=v('clt_emp2'),cpf=v('clt_cpf'),cargo=v('clt_cargo'),sal=v('clt_sal'),jorn=v('clt_jorn'),ini=v('clt_ini'),cid=v('clt_cid');
+    const iniFmt = ini!=='___' ? new Date(ini+'T12:00:00').toLocaleDateString('pt-BR') : '___';
+    txt=`CONTRATO INDIVIDUAL DE TRABALHO
+
+Pelo presente instrumento, regido pela Consolidação das Leis do Trabalho (CLT), as partes abaixo identificadas celebram o presente Contrato de Trabalho:
+
+EMPREGADOR: ${emp} — CNPJ: ${cnpj}
+EMPREGADO: ${func} — CPF: ${cpf}
+
+CLÁUSULA I — DA FUNÇÃO
+O EMPREGADO exercerá a função de ${cargo}, comprometendo-se a executar suas atividades com zelo, dedicação e em conformidade com as orientações da empresa.
+
+CLÁUSULA II — DA JORNADA DE TRABALHO
+A jornada de trabalho será de ${jorn}, respeitados os intervalos legais para descanso e alimentação.
+
+CLÁUSULA III — DA REMUNERAÇÃO
+O EMPREGADO receberá salário mensal de R$ ${sal}, a ser pago até o 5º dia útil do mês subsequente ao trabalhado.
+
+CLÁUSULA IV — DA DATA DE INÍCIO
+O presente contrato terá início em ${iniFmt}, por prazo indeterminado, salvo estipulação em contrário.
+
+CLÁUSULA V — DOS BENEFÍCIOS
+Serão assegurados ao EMPREGADO os benefícios previstos em lei e em eventual convenção coletiva da categoria, incluindo férias, 13º salário, FGTS e demais direitos trabalhistas.
+
+CLÁUSULA VI — DA CONFIDENCIALIDADE
+O EMPREGADO compromete-se a manter sigilo sobre informações confidenciais da empresa, mesmo após o término do contrato.
+
+CLÁUSULA VII — DA RESCISÃO
+O contrato poderá ser rescindido por qualquer das partes, observados os direitos e obrigações previstos na legislação trabalhista vigente.
+
+CLÁUSULA VIII — DO FORO
+Fica eleito o foro de ${cid} para dirimir eventuais conflitos decorrentes deste contrato.
+
+${cid}, ${hoje}.
+
+___________________________________     ___________________________________
+${emp}                                   ${func}
+EMPREGADOR                               EMPREGADO
+
+Testemunha 1: _______________________   Testemunha 2: _______________________`;
+    preencherEMostrar('r_trabalho','trabalho_pdf',txt);
+  }
+
+  else if(tipo==='estagio'){
+    const emp=v('est_emp'),nome=v('est_nome'),inst=v('est_inst'),curso=v('est_curso'),bolsa=v('est_bolsa'),ch=v('est_ch'),dur=v('est_dur'),cid=v('est_cid');
+    txt=`TERMO DE COMPROMISSO DE ESTÁGIO
+
+Nos termos da Lei nº 11.788/2008, as partes abaixo celebram o presente Termo de Compromisso de Estágio:
+
+CONCEDENTE: ${emp}
+ESTAGIÁRIO(A): ${nome}
+INSTITUIÇÃO DE ENSINO: ${inst}
+CURSO: ${curso}
+
+CLÁUSULA I — DO OBJETO
+O presente termo tem por objetivo proporcionar ao ESTAGIÁRIO experiência prática relacionada à sua formação acadêmica, em conformidade com o projeto pedagógico do curso.
+
+CLÁUSULA II — DA CARGA HORÁRIA
+O estágio terá carga horária de ${ch}, compatível com o horário escolar do ESTAGIÁRIO.
+
+CLÁUSULA III — DA BOLSA-AUXÍLIO
+Será concedida bolsa-auxílio mensal no valor de R$ ${bolsa}, além de auxílio-transporte, conforme legislação vigente.
+
+CLÁUSULA IV — DA DURAÇÃO
+O presente estágio terá duração de ${dur}, podendo ser prorrogado mediante termo aditivo, respeitado o limite legal de 2 anos para o mesmo concedente.
+
+CLÁUSULA V — DO RECESSO
+O ESTAGIÁRIO terá direito a recesso de 30 dias após cada 12 meses de estágio, preferencialmente durante suas férias escolares.
+
+CLÁUSULA VI — DA SUPERVISÃO
+O estágio será supervisionado por profissional da área, que orientará e acompanhará as atividades desenvolvidas.
+
+CLÁUSULA VII — DA RESCISÃO
+O presente termo poderá ser rescindido a qualquer tempo, por iniciativa de qualquer das partes, mediante comunicação prévia.
+
+CLÁUSULA VIII — DO FORO
+Fica eleito o foro de ${cid} para dirimir questões oriundas deste termo.
+
+${cid}, ${hoje}.
+
+___________________________________     ___________________________________
+${emp}                                   ${nome}
+CONCEDENTE                               ESTAGIÁRIO(A)
+
+___________________________________
+${inst}
+INSTITUIÇÃO DE ENSINO`;
+    preencherEMostrar('r_estagio','estagio_pdf',txt);
+  }
+
+  else if(tipo==='emprestimo'){
+    const cred=v('emp_cred'),cpf1=v('emp_cpf1'),dev=v('emp_dev'),cpf2=v('emp_cpf2'),val=v('emp_val'),juros=v('emp_juros'),prazo=v('emp_prazo'),cid=v('emp_cid');
+    txt=`CONTRATO DE MÚTUO (EMPRÉSTIMO ENTRE PESSOAS FÍSICAS)
+
+Pelo presente instrumento particular, as partes abaixo qualificadas celebram o presente Contrato de Mútuo:
+
+CREDOR (MUTUANTE): ${cred} — CPF: ${cpf1}
+DEVEDOR (MUTUÁRIO): ${dev} — CPF: ${cpf2}
+
+CLÁUSULA I — DO OBJETO
+O CREDOR empresta ao DEVEDOR a quantia de R$ ${val}, que declara ter recebido neste ato.
+
+CLÁUSULA II — DOS JUROS
+${juros!=='0' && juros!=='___' ? 'Incidirão sobre o valor emprestado juros de '+juros+'% ao mês, calculados de forma simples.' : 'O presente empréstimo não terá incidência de juros, sendo gratuito (mútuo simples).'}
+
+CLÁUSULA III — DO PRAZO DE PAGAMENTO
+O DEVEDOR compromete-se a restituir o valor emprestado no prazo de: ${prazo}.
+
+CLÁUSULA IV — DA FORMA DE PAGAMENTO
+O pagamento poderá ser realizado via PIX, transferência bancária ou em espécie, mediante recibo.
+
+CLÁUSULA V — DO INADIMPLEMENTO
+Em caso de não pagamento no prazo estipulado, incidirão multa de 2% sobre o valor devido, além de juros de mora de 1% ao mês.
+
+CLÁUSULA VI — DO FORO
+Fica eleito o foro de ${cid} para dirimir quaisquer questões decorrentes deste contrato.
+
+${cid}, ${hoje}.
+
+___________________________________     ___________________________________
+${cred}                                  ${dev}
+CREDOR                                   DEVEDOR
+
+Testemunha 1: _______________________   Testemunha 2: _______________________`;
+    preencherEMostrar('r_emprestimo','emprestimo_pdf',txt);
+  }
+
+  else if(tipo==='honorarios'){
+    const adv=v('hon_adv'),oab=v('hon_oab'),cli=v('hon_cli'),cpf=v('hon_cpf'),obj=v('hon_obj'),val=v('hon_val'),pgto=v('hon_pgto'),exito=v('hon_exito'),cid=v('hon_cid');
+    txt=`CONTRATO DE PRESTAÇÃO DE SERVIÇOS ADVOCATÍCIOS
+
+Pelo presente instrumento particular, nos termos da Lei nº 8.906/94 (Estatuto da OAB), as partes celebram o presente Contrato de Honorários Advocatícios:
+
+CONTRATADO: ${adv} — ${oab}
+CONTRATANTE: ${cli} — CPF/CNPJ: ${cpf}
+
+CLÁUSULA I — DO OBJETO
+O presente contrato tem por objeto a prestação de serviços advocatícios relacionados a: ${obj}.
+
+CLÁUSULA II — DOS HONORÁRIOS
+Pelos serviços prestados, o CONTRATANTE pagará ao CONTRATADO honorários no valor de R$ ${val}, da seguinte forma: ${pgto}.
+
+${exito!=='0' && exito!=='___' ? 'CLÁUSULA III — DOS HONORÁRIOS DE ÊXITO\nEm caso de êxito na demanda, será devido honorário adicional de '+exito+'% sobre o proveito econômico obtido.\n\n' : ''}CLÁUSULA ${exito!=='0' && exito!=='___' ? 'IV' : 'III'} — DAS OBRIGAÇÕES DO CONTRATADO
+O CONTRATADO obriga-se a: atuar com diligência e zelo profissional; manter o CONTRATANTE informado sobre o andamento do processo; observar o Código de Ética da OAB.
+
+CLÁUSULA ${exito!=='0' && exito!=='___' ? 'V' : 'IV'} — DAS OBRIGAÇÕES DO CONTRATANTE
+O CONTRATANTE obriga-se a: fornecer documentos e informações necessárias; efetuar o pagamento dos honorários nas datas acordadas; arcar com custas processuais quando aplicável.
+
+CLÁUSULA ${exito!=='0' && exito!=='___' ? 'VI' : 'V'} — DA RESCISÃO
+O presente contrato poderá ser rescindido por qualquer das partes mediante notificação prévia, sendo devidos os honorários proporcionais ao trabalho já realizado.
+
+CLÁUSULA ${exito!=='0' && exito!=='___' ? 'VII' : 'VI'} — DO FORO
+Fica eleito o foro de ${cid} para dirimir questões oriundas deste contrato.
+
+${cid}, ${hoje}.
+
+___________________________________     ___________________________________
+${adv}                                   ${cli}
+ADVOGADO(A)                              CONTRATANTE`;
+    preencherEMostrar('r_honorarios','honorarios_pdf',txt);
+  }
+
+  else if(tipo==='comodato'){
+    const p1=v('com_p1'),c1=v('com_c1'),p2=v('com_p2'),c2=v('com_c2'),bem=v('com_bem'),fin=v('com_fin'),prazo=v('com_prazo'),cid=v('com_cid');
+    txt=`CONTRATO DE COMODATO (EMPRÉSTIMO GRATUITO DE BEM)
+
+Pelo presente instrumento particular, as partes abaixo qualificadas celebram o presente Contrato de Comodato:
+
+COMODANTE: ${p1} — CPF/CNPJ: ${c1}
+COMODATÁRIO: ${p2} — CPF/CNPJ: ${c2}
+
+CLÁUSULA I — DO OBJETO
+O COMODANTE empresta gratuitamente ao COMODATÁRIO o seguinte bem: ${bem}.
+
+CLÁUSULA II — DA FINALIDADE
+O bem será utilizado exclusivamente para: ${fin}.
+
+CLÁUSULA III — DO PRAZO
+O presente comodato terá vigência de ${prazo}, podendo ser prorrogado mediante acordo entre as partes.
+
+CLÁUSULA IV — DAS OBRIGAÇÕES DO COMODATÁRIO
+O COMODATÁRIO obriga-se a: zelar pela conservação do bem como se fosse próprio; não emprestar ou ceder o bem a terceiros sem autorização; devolver o bem nas mesmas condições recebidas, salvo desgaste natural.
+
+CLÁUSULA V — DA RESPONSABILIDADE
+O COMODATÁRIO responderá por danos causados ao bem por uso inadequado ou negligência.
+
+CLÁUSULA VI — DA RESTITUIÇÃO
+Ao final do prazo estipulado, o bem deverá ser restituído ao COMODANTE no estado em que foi recebido.
+
+CLÁUSULA VII — DO FORO
+Fica eleito o foro de ${cid} para dirimir quaisquer questões deste contrato.
+
+${cid}, ${hoje}.
+
+___________________________________     ___________________________________
+${p1}                                    ${p2}
+COMODANTE                                COMODATÁRIO
+
+Testemunha 1: _______________________   Testemunha 2: _______________________`;
+    preencherEMostrar('r_comodato','comodato_pdf',txt);
+  }
+
+  else if(tipo==='representacao'){
+    const emp=v('rep_emp'),cnpj=v('rep_cnpj'),rep=v('rep_rep'),cpf=v('rep_cpf'),reg=v('rep_reg'),com=v('rep_com'),prod=v('rep_prod'),cid=v('rep_cid');
+    txt=`CONTRATO DE REPRESENTAÇÃO COMERCIAL
+
+Nos termos da Lei nº 4.886/65, as partes abaixo celebram o presente Contrato de Representação Comercial:
+
+REPRESENTADA: ${emp} — CNPJ: ${cnpj}
+REPRESENTANTE COMERCIAL: ${rep} — CPF/CNPJ: ${cpf}
+
+CLÁUSULA I — DO OBJETO
+A REPRESENTADA contrata o REPRESENTANTE para promover a venda dos seguintes produtos: ${prod}.
+
+CLÁUSULA II — DA ÁREA DE ATUAÇÃO
+O REPRESENTANTE atuará na seguinte área geográfica: ${reg}.
+
+CLÁUSULA III — DA COMISSÃO
+Pelos negócios realizados e aprovados pela REPRESENTADA, o REPRESENTANTE fará jus a comissão de ${com}% sobre o valor das vendas.
+
+CLÁUSULA IV — DAS OBRIGAÇÕES DO REPRESENTANTE
+O REPRESENTANTE obriga-se a: promover ativamente os produtos na área designada; manter a REPRESENTADA informada sobre o mercado; observar as políticas comerciais estabelecidas.
+
+CLÁUSULA V — DA EXCLUSIVIDADE
+${reg!=='___' ? 'Fica assegurada ao REPRESENTANTE a exclusividade de atuação na área descrita na Cláusula II.' : 'A exclusividade de atuação deverá ser acordada separadamente entre as partes.'}
+
+CLÁUSULA VI — DA RESCISÃO
+O presente contrato poderá ser rescindido por qualquer das partes mediante aviso prévio de 30 dias, observados os direitos previstos em lei.
+
+CLÁUSULA VII — DO FORO
+Fica eleito o foro de ${cid} para dirimir questões oriundas deste contrato.
+
+${cid}, ${hoje}.
+
+___________________________________     ___________________________________
+${emp}                                   ${rep}
+REPRESENTADA                             REPRESENTANTE COMERCIAL`;
+    preencherEMostrar('r_representacao','representacao_pdf',txt);
+  }
+
+  else if(tipo==='cessao'){
+    const ced=v('ces_ced'),cpf1=v('ces_cpf1'),ces=v('ces_ces'),cpf2=v('ces_cpf2'),obra=v('ces_obra'),val=v('ces_val'),tipoCessao=document.getElementById('ces_tipo')?document.getElementById('ces_tipo').value:'total',cid=v('ces_cid');
+    txt=`TERMO DE CESSÃO DE DIREITOS AUTORAIS
+
+Pelo presente instrumento particular, nos termos da Lei nº 9.610/98 (Lei de Direitos Autorais), as partes celebram o presente Termo de Cessão:
+
+CEDENTE: ${ced} — CPF/CNPJ: ${cpf1}
+CESSIONÁRIO: ${ces} — CPF/CNPJ: ${cpf2}
+
+CLÁUSULA I — DO OBJETO
+O CEDENTE cede ao CESSIONÁRIO, de forma ${tipoCessao==='total'?'total, definitiva e irrevogável':'parcial, para uso específico'}, os direitos patrimoniais sobre a seguinte obra: ${obra}.
+
+CLÁUSULA II — DA REMUNERAÇÃO
+Pela presente cessão, o CESSIONÁRIO pagará ao CEDENTE o valor de R$ ${val}, a título de remuneração integral pelos direitos cedidos.
+
+CLÁUSULA III — DO ALCANCE DA CESSÃO
+${tipoCessao==='total' ? 'A cessão abrange todos os direitos patrimoniais de reprodução, distribuição, modificação e exploração comercial da obra, em qualquer meio ou formato.' : 'A cessão está limitada ao uso específico descrito, não se estendendo a outras formas de exploração da obra.'}
+
+CLÁUSULA IV — DOS DIREITOS MORAIS
+Os direitos morais sobre a obra permanecem com o CEDENTE, sendo o CESSIONÁRIO obrigado a creditar a autoria sempre que aplicável e exigido por lei.
+
+CLÁUSULA V — DA GARANTIA
+O CEDENTE declara ser o único e legítimo autor da obra, isentando o CESSIONÁRIO de quaisquer reivindicações de terceiros.
+
+CLÁUSULA VI — DO FORO
+Fica eleito o foro de ${cid} para dirimir questões oriundas deste termo.
+
+${cid}, ${hoje}.
+
+___________________________________     ___________________________________
+${ced}                                   ${ces}
+CEDENTE                                  CESSIONÁRIO`;
+    preencherEMostrar('r_cessao','cessao_pdf',txt);
+  }
+
+  else if(tipo==='franquia'){
+    const fr=v('fra_fr'),cnpj1=v('fra_cnpj1'),fra=v('fra_fra'),cnpj2=v('fra_cnpj2'),taxa=v('fra_taxa'),roy=v('fra_roy'),terr=v('fra_terr'),prazo=v('fra_prazo'),cid=v('fra_cid');
+    txt=`CONTRATO DE FRANQUIA EMPRESARIAL
+
+Nos termos da Lei nº 13.966/2019 (Lei de Franquias), as partes abaixo celebram o presente Contrato de Franquia:
+
+FRANQUEADOR: ${fr} — CNPJ: ${cnpj1}
+FRANQUEADO: ${fra} — CPF/CNPJ: ${cnpj2}
+
+CLÁUSULA I — DO OBJETO
+O FRANQUEADOR concede ao FRANQUEADO o direito de uso da marca, sistema operacional e know-how do negócio, conforme padrões estabelecidos pela rede.
+
+CLÁUSULA II — DA TAXA DE FRANQUIA
+O FRANQUEADO pagará ao FRANQUEADOR taxa inicial de franquia no valor de R$ ${taxa}, referente ao direito de uso da marca e treinamento inicial.
+
+CLÁUSULA III — DOS ROYALTIES
+O FRANQUEADO pagará mensalmente royalties de ${roy}% sobre o faturamento bruto da unidade franqueada.
+
+CLÁUSULA IV — DO TERRITÓRIO
+Fica concedida ao FRANQUEADO a exclusividade de atuação no seguinte território: ${terr}.
+
+CLÁUSULA V — DO PRAZO
+O presente contrato vigorará por ${prazo}, podendo ser renovado mediante acordo entre as partes.
+
+CLÁUSULA VI — DAS OBRIGAÇÕES DO FRANQUEADOR
+Fornecer treinamento inicial; disponibilizar manual de operações; prestar suporte técnico e comercial contínuo.
+
+CLÁUSULA VII — DAS OBRIGAÇÕES DO FRANQUEADO
+Seguir os padrões operacionais da rede; manter a qualidade dos produtos/serviços; pagar pontualmente os royalties devidos.
+
+CLÁUSULA VIII — DO FORO
+Fica eleito o foro de ${cid} para dirimir questões oriundas deste contrato.
+
+${cid}, ${hoje}.
+
+___________________________________     ___________________________________
+${fr}                                    ${fra}
+FRANQUEADOR                              FRANQUEADO`;
+    preencherEMostrar('r_franquia','franquia_pdf',txt);
+  }
+
+  else if(tipo==='permuta'){
+    const p1=v('per_p1'),c1=v('per_c1'),p2=v('per_p2'),c2=v('per_c2'),b1=v('per_b1'),b2=v('per_b2'),cid=v('per_cid');
+    txt=`CONTRATO DE PERMUTA (TROCA)
+
+Pelo presente instrumento particular, as partes abaixo qualificadas celebram o presente Contrato de Permuta:
+
+PARTE 1: ${p1} — CPF/CNPJ: ${c1}
+PARTE 2: ${p2} — CPF/CNPJ: ${c2}
+
+CLÁUSULA I — DO OBJETO
+As partes acordam realizar a seguinte permuta:
+A PARTE 1 entrega à PARTE 2: ${b1}.
+A PARTE 2 entrega à PARTE 1: ${b2}.
+
+CLÁUSULA II — DA EQUIVALÊNCIA
+As partes declaram que os bens/serviços permutados possuem valores equivalentes, não havendo necessidade de complementação financeira, salvo disposição em contrário.
+
+CLÁUSULA III — DO PRAZO DE ENTREGA
+As entregas/prestações descritas na Cláusula I deverão ocorrer em até 30 dias da assinatura deste contrato, salvo acordo diverso entre as partes.
+
+CLÁUSULA IV — DAS GARANTIAS
+Cada parte garante que os bens ou serviços oferecidos estão livres de ônus, vícios ou qualquer impedimento legal.
+
+CLÁUSULA V — DO INADIMPLEMENTO
+Em caso de não cumprimento por qualquer das partes, a parte prejudicada poderá exigir o cumprimento da obrigação ou rescisão com restituição ao status anterior.
+
+CLÁUSULA VI — DO FORO
+Fica eleito o foro de ${cid} para dirimir quaisquer questões deste contrato.
+
+${cid}, ${hoje}.
+
+___________________________________     ___________________________________
+${p1}                                    ${p2}
+PARTE 1                                  PARTE 2
+
+Testemunha 1: _______________________   Testemunha 2: _______________________`;
+    preencherEMostrar('r_permuta','permuta_pdf',txt);
+  }
+
+  else if(tipo==='fianca'){
+    const loc=v('fia_loc'),lot=v('fia_lot'),fia=v('fia_fia'),cpf=v('fia_cpf'),end=v('fia_end'),val=v('fia_val'),cid=v('fia_cid');
+    txt=`TERMO DE FIANÇA LOCATÍCIA
+
+Pelo presente instrumento particular, anexo e parte integrante do Contrato de Locação, o FIADOR abaixo qualificado presta fiança em favor do LOCATÁRIO:
+
+LOCADOR: ${loc}
+LOCATÁRIO (AFIANÇADO): ${lot}
+FIADOR: ${fia} — CPF: ${cpf}
+
+CLÁUSULA I — DO OBJETO DA FIANÇA
+O FIADOR garante, em caráter solidário, o fiel cumprimento de todas as obrigações assumidas pelo LOCATÁRIO no contrato de locação do imóvel situado em: ${end}.
+
+CLÁUSULA II — DO ALCANCE DA GARANTIA
+A fiança abrange o pagamento do aluguel mensal de R$ ${val}, encargos, multas, danos ao imóvel e demais obrigações previstas no contrato de locação principal.
+
+CLÁUSULA III — DA RENÚNCIA AO BENEFÍCIO DE ORDEM
+O FIADOR renuncia expressamente ao benefício de ordem previsto no art. 827 do Código Civil, respondendo solidariamente com o LOCATÁRIO desde o início do inadimplemento.
+
+CLÁUSULA IV — DA VIGÊNCIA
+A presente fiança vigorará durante todo o prazo do contrato de locação, incluindo eventuais prorrogações, até a efetiva entrega das chaves.
+
+CLÁUSULA V — DA EXONERAÇÃO
+O FIADOR somente poderá se exonerar da fiança mediante notificação expressa ao LOCADOR, observado o prazo mínimo de 120 dias previsto em lei.
+
+CLÁUSULA VI — DO FORO
+Fica eleito o foro de ${cid} para dirimir quaisquer questões decorrentes deste termo.
+
+${cid}, ${hoje}.
+
+___________________________________     ___________________________________
+${fia}                                   ${loc}
+FIADOR                                   LOCADOR
+
+Testemunha: _______________________`;
+    preencherEMostrar('r_fianca','fianca_pdf',txt);
+  }
+}
+
+function copiarTexto(id){
+  const txt=document.getElementById(id).textContent;
+  navigator.clipboard.writeText(txt).then(()=>alert('✅ Texto copiado! Cole no Word ou Google Docs para formatar.'));
+}
+
+function gerarPix(){
+  const chave=document.getElementById('pix_chave').value||'';
+  const val=+document.getElementById('pix_val').value||0;
+  const nome=document.getElementById('pix_nome').value||'Recebedor';
+  const cid=document.getElementById('pix_cid').value||'SAO PAULO';
+  if(!chave){alert('Informe a chave PIX');return;}
+  const nomeLimit=nome.substring(0,25).toUpperCase().replace(/[^A-Z0-9 ]/g,'');
+  const cidLimit=cid.substring(0,15).toUpperCase().replace(/[^A-Z0-9 ]/g,'');
+  const valStr=val>0?'5404'+val.toFixed(2).length.toString().padStart(2,'0')+val.toFixed(2):'';
+  const payload=`000201010212${('26'+(chave.length+18).toString().padStart(2,'0')+'0014br.gov.bcb.pix01'+chave.length.toString().padStart(2,'0')+chave).length.toString().padStart(2,'0')}0014br.gov.bcb.pix01${chave.length.toString().padStart(2,'0')}${chave}52040000530398654${val>0?'04'+val.toFixed(2).length.toString().padStart(2,'0')+val.toFixed(2):''}5802BR59${nomeLimit.length.toString().padStart(2,'0')}${nomeLimit}60${cidLimit.length.toString().padStart(2,'0')}${cidLimit}62070503***6304`;
+  const box=document.getElementById('r_pix');
+  document.getElementById('pix_code').textContent='⚠️ Código PIX de demonstração\nChave: '+chave+'\nValor: '+(val?'R$ '+val.toFixed(2):'Não definido')+'\nRecebedor: '+nome;
+  box.style.display='block';
+}
+function copiarPix(){ navigator.clipboard.writeText(document.getElementById('pix_code').textContent).then(()=>alert('Copiado!')); }
+
+// INICIALIZAR DATA
+document.querySelectorAll('input[type=date]').forEach(el=>{ if(!el.value) el.value=new Date().toISOString().split('T')[0]; });
+
+// UPDATE USOS RESTANTES
+document.getElementById('usosRestantes').textContent=(5-usosHoje)+' usos grátis hoje';
+</script>
+</body>
+</html>
